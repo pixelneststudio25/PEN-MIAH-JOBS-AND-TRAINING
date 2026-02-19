@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEN-MIAH Jobs & Training</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sticky Header -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <!-- If you have PENMIAH.png, it will be used; otherwise text fallback -->
+                <img src="PENMIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            </div>
+            <!-- Desktop Navigation (hidden on mobile) -->
+            <ul class="nav-menu-desktop">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#training">Training</a></li>
+                <li><a href="#jobs">Jobs</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Full-screen Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-menu-items">
+            <li><a href="#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <li><a href="#jobs"><i class="fas fa-briefcase"></i> Jobs</a></li>
+            <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- Hero Section (full background) -->
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Empower Your Future with <span class="highlight">Expert Training</span> & <span class="highlight">Real Jobs</span></h1>
+                <p>We bridge the gap between skills and employment. Join us to unlock your potential.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                    <a href="#jobs" class="btn btn-secondary">Browse Jobs</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>PEN-MIAH JOBS AND TRAINING is dedicated to empowering individuals with the skills they need to thrive in today's competitive job market. We combine top-tier training programs with direct job placement assistance to create a seamless path from learning to earning.</p>
+                        <p>Our mission is to reduce unemployment by providing accessible, high-quality vocational training and connecting graduates with reputable employers. We believe in practical skills, mentorship, and lifelong career support.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Training session">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-user-graduate"></i>
+                        <h3>Career Counseling</h3>
+                        <p>Personalized guidance to identify your strengths and map out your career path.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Vocational Training</h3>
+                        <p>Hands-on courses in high-demand fields like IT, healthcare, and skilled trades.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Job Placement</h3>
+                        <p>Direct connections with employers who are actively seeking qualified candidates.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Resume & Interview Prep</h3>
+                        <p>Professional coaching to help you stand out and land the job you deserve.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Programs -->
+        <section id="training">
+            <div class="container">
+                <h2>Training Programs</h2>
+                <div class="training-grid">
+                    <div class="training-card">
+                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Web Development">
+                        <h3>Full-Stack Web Development</h3>
+                        <p>12 weeks · Online & In-person</p>
+                        <p>Learn HTML, CSS, JavaScript, React, Node.js, and MongoDB. Build real projects.</p>
+                        <a href="#" class="btn-small">Learn More</a>
+                    </div>
+                    <div class="training-card">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Healthcare">
+                        <h3>Certified Nursing Assistant</h3>
+                        <p>8 weeks · In-person</p>
+                        <p>Hands-on clinical training with job placement assistance in local hospitals.</p>
+                        <a href="#" class="btn-small">Learn More</a>
+                    </div>
+                    <div class="training-card">
+                        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Electrician">
+                        <h3>Electrical Technician</h3>
+                        <p>10 weeks · In-person</p>
+                        <p>Comprehensive training on residential and commercial electrical systems.</p>
+                        <a href="#" class="btn-small">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Job Listings -->
+        <section id="jobs">
+            <div class="container">
+                <h2>Recent Job Openings</h2>
+                <div class="jobs-grid">
+                    <div class="job-card">
+                        <h3>Junior Web Developer</h3>
+                        <p class="company">TechSolutions Inc.</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> New York, NY</p>
+                        <p class="description">Join a dynamic team building modern web applications. HTML/CSS/JS required.</p>
+                        <a href="#" class="btn-small">Apply Now</a>
+                    </div>
+                    <div class="job-card">
+                        <h3>Customer Service Rep</h3>
+                        <p class="company">Global Connect</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Remote</p>
+                        <p class="description">Provide exceptional support to clients via phone and email. Training provided.</p>
+                        <a href="#" class="btn-small">Apply Now</a>
+                    </div>
+                    <div class="job-card">
+                        <h3>Medical Assistant</h3>
+                        <p class="company">City Health Clinic</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Chicago, IL</p>
+                        <p class="description">Assist physicians with patient care. Certification required (we can help).</p>
+                        <a href="#" class="btn-small">Apply Now</a>
+                    </div>
+                </div>
+                <div class="center-btn">
+                    <a href="#" class="btn btn-primary">View All Jobs</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials">
+            <div class="container">
+                <h2>What Our Graduates Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>“The web development bootcamp changed my life. Within a month of graduating, I landed a job as a junior developer. The instructors truly care.”</p>
+                        <div class="user">
+                            <img src="https://images.unsplash.com/photo-1494790108777-296ef5a60e11?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sarah">
+                            <div>
+                                <h4>Sarah Johnson</h4>
+                                <p>Web Developer at BrightSoft</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>“I was unemployed for months. PEN-MIAH not only trained me as a CNA but also helped me get hired at a great clinic. Forever grateful!”</p>
+                        <div class="user">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Michael">
+                            <div>
+                                <h4>Michael Chen</h4>
+                                <p>CNA at Mercy Hospital</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Suite 400, New York, NY 10001</p>
+                        <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@penmiahtraining.com</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contactForm">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Email Address" required>
+                        <input type="tel" name="phone" placeholder="Phone Number (optional)">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PEN-MIAH JOBS AND TRAINING. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
