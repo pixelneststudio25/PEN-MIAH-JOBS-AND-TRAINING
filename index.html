@@ -13,16 +13,15 @@
 
     <!-- Favicon – Modern Browsers -->
     <link rel="icon" type="image/png" sizes="32x32" href="/PENMIAH-FAVICON.png">
-    <!-- Optional: also provide a 16x16 version -->
     <link rel="icon" type="image/png" sizes="16x16" href="/PENMIAH-FAVICON-16x16.png">
 
-    <!-- Classic fallback (ICO) – if you have favicon.ico in root -->
+    <!-- Classic fallback (ICO) -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <!-- Apple Touch Icon (for iOS home screen) – if you have a 180x180 PNG -->
+    <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-    <!-- Optional: theme color for browser UI (match your brand) -->
+    <!-- Theme color -->
     <meta name="theme-color" content="#2596be">
 </head>
 <body>
@@ -31,13 +30,18 @@
         <nav class="navbar">
             <div class="logo">
                 <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-line1">PEN-MIAH</span>
+                    <span class="logo-line2">JOBS AND TRAINING</span>
+                </span>
             </div>
-            <!-- Desktop Navigation (hidden on mobile) -->
+            <!-- Desktop Navigation -->
             <ul class="nav-menu-desktop">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#training">Training</a></li>
+                <li><a href="#clients">Clients</a></li>
                 <li><a href="#jobs">Jobs</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -58,6 +62,7 @@
             <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
             <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
             <li><a href="#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <li><a href="#clients"><i class="fas fa-handshake"></i> Clients</a></li>
             <li><a href="#jobs"><i class="fas fa-briefcase"></i> Jobs</a></li>
             <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
             <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
@@ -65,13 +70,11 @@
     </div>
 
     <main>
-        <!-- Hero Section (full background) -->
+        <!-- Hero Section -->
         <section id="hero">
             <div class="hero-content">
-                <h1>Your Trusted Partner in <span class="highlight">Recruitment</span> & <span class="highlight">Training</span> Since 2008
-                </h1>
+                <h1>Your Trusted Partner in <span class="highlight">Recruitment</span> & <span class="highlight">Training</span> Since 2008</h1>
                 <p>We connect talent with opportunity – from unskilled to senior cadre, and deliver transformative soft skills training.</p>
-               
                 <div class="hero-btns">
                     <a href="#contact" class="btn btn-primary">Get Started</a>
                     <a href="#jobs" class="btn btn-secondary">Browse Jobs</a>
@@ -87,9 +90,9 @@
                     <div class="about-text">
                         <h3>Who We Are</h3>
                         <p>PEN-MIAH is a Human Resource firm formally registered in <strong>2008</strong>. Our activities are mainly <strong>Training</strong> and <strong>Recruitment</strong>. Over the years, we have recruited and trained staff for a wide variety of clients in the private sector and government – from unskilled labour (domestic staff inclusive) to skilled staff; SSCE graduates, undergraduates, polytechnic and university graduates, and senior cadre staff.</p>
-                <p>Our services include shortlisting candidates for organizations with bulk applications, facilitating interviews, and sitting on interview panels. We are currently the official recruiters for <strong>OPAY</strong> (an internet transport company in Jos, Plateau State), managing over 300 contract promoters.</p>
-                <h3 style="margin-top: 2rem; color: var(--primary-blue);">Our Founder & CEO</h3>
-                <p><strong>Esther Nanna Yakubu (BL, PNM)</strong> is a Lawyer and Human Resources Consultant. Her specialties include recruiting staff, structuring HR and Administrative departments, developing work policies, job descriptions, and creating departments. With over 16 years of experience in the human resource field (since 2003), she is a Professional Negotiator and Mediator skilled in settling workplace conflicts and matching people with appropriate jobs.</p>
+                        <p>Our services include shortlisting candidates for organizations with bulk applications, facilitating interviews, and sitting on interview panels. We are currently the official recruiters for <strong>OPAY</strong> (an internet transport company in Jos, Plateau State), managing over 300 contract promoters.</p>
+                        <h3 style="margin-top: 2rem; color: var(--primary-blue);">Our Founder & CEO</h3>
+                        <p><strong>Esther Nanna Yakubu (BL, PNM)</strong> is a Lawyer and Human Resources Consultant. Her specialties include recruiting staff, structuring HR and Administrative departments, developing work policies, job descriptions, and creating departments. With over 16 years of experience in the human resource field (since 2003), she is a Professional Negotiator and Mediator skilled in settling workplace conflicts and matching people with appropriate jobs.</p>
                     </div>
                     <div class="about-image">
                         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Training session">
@@ -97,64 +100,125 @@
                 </div>
             </div>
         </section>
-          
 
         <!-- Services Section -->
         <section id="services">
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-briefcase"></i>
-                    <h3>Recruitment</h3>
-                    <p>We recruit a wide variety of staff:</p>
-                    <ul style="text-align: left; margin-top: 1rem; list-style: none;">
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Unskilled (domestic staff inclusive)</li>
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Skilled & SSCE graduates</li>
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Undergraduates & University/Polytechnic graduates</li>
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Senior cadre staff</li>
-                    </ul>
-                    <p style="margin-top: 1rem;">We also shortlist candidates, facilitate interviews, and sit on panels for clients.</p>
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Recruitment</h3>
+                        <p>We recruit a wide variety of staff:</p>
+                        <ul style="text-align: left; margin-top: 1rem; list-style: none;">
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Unskilled (domestic staff inclusive)</li>
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Skilled & SSCE graduates</li>
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Undergraduates & University/Polytechnic graduates</li>
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Senior cadre staff</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">We also shortlist candidates, facilitate interviews, and sit on panels for clients.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Training</h3>
+                        <p>We offer a wide variety of soft skills:</p>
+                        <ul style="text-align: left; margin-top: 1rem; list-style: none;">
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Time Management</li>
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Communication Skills</li>
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Self Awareness</li>
+                            <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Work Ethics (3‑part series)</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">Custom‑made training for clients, delivered in‑house or at your preferred venue.</p>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <h3>Training</h3>
-                    <p>We offer a wide variety of soft skills:</p>
-                    <ul style="text-align: left; margin-top: 1rem; list-style: none;">
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Time Management</li>
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Communication Skills</li>
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Self Awareness</li>
-                        <li><i class="fas fa-check" style="color: var(--accent-pink); margin-right: 8px;"></i>Work Ethics (3‑part series)</li>
-                    </ul>
-                    <p style="margin-top: 1rem;">Custom‑made training for clients, delivered in‑house or at your preferred venue.</p>
-                </div>
-            </div>          
+            </div>
         </section>
 
-        <!-- Training Programs -->
+        <!-- Training Programs (Work Ethics) -->
         <section id="training">
             <div class="container">
-                <h2>Training Programs</h2>
+                <h2>Our Flagship: Work Ethics Training</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Carefully crafted from over 10 years of providing HR solutions. Highly recommended for organisations seeking to boost staff performance.</p>
                 <div class="training-grid">
                     <div class="training-card">
-                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Web Development">
-                        <h3>Full-Stack Web Development</h3>
-                        <p>12 weeks · Online & In-person</p>
-                        <p>Learn HTML, CSS, JavaScript, React, Node.js, and MongoDB. Build real projects.</p>
-                        <a href="#" class="btn-small">Learn More</a>
+                        <img src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Work Ethics Part 1">
+                        <h3>Work Ethics Part 1</h3>
+                        <ul style="padding: 0 1rem 1rem; list-style: none;">
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Self awareness</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Personal leadership</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Emotional Intelligence</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>People Skills</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Professional effectiveness</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Time Management</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Communication Skills</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Presentation Skills</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Problem Solving Skills</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Conflict resolution</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Organizational Culture</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Ethics</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Planning and Decision making</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Execution</li>
+                        </ul>
                     </div>
                     <div class="training-card">
-                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Healthcare">
-                        <h3>Certified Nursing Assistant</h3>
-                        <p>8 weeks · In-person</p>
-                        <p>Hands-on clinical training with job placement assistance in local hospitals.</p>
-                        <a href="#" class="btn-small">Learn More</a>
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Work Ethics Part 2">
+                        <h3>Work Ethics Part 2</h3>
+                        <ul style="padding: 0 1rem 1rem; list-style: none;">
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Self awareness 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Personal leadership 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Emotional Intelligence 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>People Skills 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Professional effectiveness 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Time Management 3</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Communication Skills 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Presentation Skills 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Problem Solving Skills 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Conflict resolution 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Organizational Culture 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Ethics</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Planning and Decision making 2</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Execution 2</li>
+                        </ul>
                     </div>
                     <div class="training-card">
-                        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Electrician">
-                        <h3>Electrical Technician</h3>
-                        <p>10 weeks · In-person</p>
-                        <p>Comprehensive training on residential and commercial electrical systems.</p>
-                        <a href="#" class="btn-small">Learn More</a>
+                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Work Ethics Part 3">
+                        <h3>Work Ethics Part 3</h3>
+                        <ul style="padding: 0 1rem 1rem; list-style: none;">
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Self awareness therapy</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Execution</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Team building</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Anger Management</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Delegation</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Proficiency</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Mastery</li>
+                            <li><i class="fas fa-circle" style="color: var(--accent-pink); font-size: 0.5rem; vertical-align: middle; margin-right: 8px;"></i>Minding my BUSINESS! (Understanding boundaries)</li>
+                        </ul>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clients Section -->
+        <section id="clients" style="background-color: var(--light);">
+            <div class="container">
+                <h2>Our Valued Clients</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">We have served a diverse range of organisations in both the private and public sectors.</p>
+                <div class="clients-grid">
+                    <ul style="columns: 2; list-style: none; padding: 0;">
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>OPAY Jos, Plateau State</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Great Blessings Jos, Plateau State</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Federal Ministry of Justice Headquarters Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Legal Aid Council Headquarters Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Civil Litigation Department, Legal Aid Council HQ Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Banana Republic Asokoro Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Suhjuiced Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>ACAI Group of Companies Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Novel Suites Ltd Jos, Plateau State</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Vodi Shirtmakers Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Asher's Clothesline Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>Save the Children Foundation Abuja</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>SPARC Abuja</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -261,6 +325,5 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
-
+                      
