@@ -284,8 +284,10 @@ section {
     -webkit-backdrop-filter: blur(10px);
     z-index: 1050;
     display: flex;
-    justify-content: center;
+    flex-direction: column;       /* stack children vertically */
+    justify-content: flex-start;  /* align to top so scrolling works */
     align-items: center;
+    overflow-y: auto; /* enable vertical scrolling */
     transform: translateX(100%);
     transition: transform 0.4s ease-in-out;
     margin-top: 43px;
