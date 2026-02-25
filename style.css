@@ -774,3 +774,44 @@ footer {
         height: 40px;
     }
 }
+
+
+#clients ul {
+    column-gap: 2rem;
+}
+#clients li {
+    margin-bottom: 1rem;
+    break-inside: avoid;
+}
+@media (max-width: 768px) {
+    #clients ul {
+        columns: 1;
+    }
+}
+
+
+.training-card ul {
+    margin: 0 0 1rem 0;
+    padding: 0 1rem;
+}
+.training-card li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+.training-card li i {
+    margin-right: 8px;
+    font-size: 0.5rem;
+    color: var(--accent-pink);
+}
+
+
+.service-card ul {
+    margin: 0;
+    padding: 0;
+}
+.service-card li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
