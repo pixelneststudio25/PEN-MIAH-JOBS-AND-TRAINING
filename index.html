@@ -11,15 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Favicon – Modern Browsers -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/PENMIAH-FAVICON.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/PENMIAH-FAVICON-16x16.png">
-
-    <!-- Classic fallback (ICO) -->
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <!-- Favicon – correct relative paths (files in same folder) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
     <!-- Theme color -->
     <meta name="theme-color" content="#2596be">
@@ -224,7 +220,7 @@
         </section>
 
         <!-- Job Listings -->
-         <section id="jobs">
+        <section id="jobs">
             <div class="container">
                 <h2>Current Job Openings</h2>
                 <div class="jobs-grid">
@@ -287,6 +283,20 @@
             </div>
         </section>
 
+        <!-- ===== NEW ADVERTISEMENT SECTION ===== -->
+        <section id="advertise" class="ad-section">
+            <div class="container">
+                <h2>Advertise With Us</h2>
+                <p>Reach our audience of job seekers, employers, and professionals. Promote your business directly to a targeted community.</p>
+                <div class="ad-placeholder">
+                    <p>Your ad could be here!</p>
+                    <p><i class="fas fa-arrow-down"></i> <a href="#contact">Contact us</a> for rates and availability. <i class="fas fa-arrow-down"></i></p>
+                </div>
+                <!-- When you have a client, replace the placeholder with an actual ad banner -->
+                <!-- Example: <a href="client-url.com"><img src="client-ad.jpg" alt="Client Ad"></a> -->
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact">
             <div class="container">
@@ -326,4 +336,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-                      
