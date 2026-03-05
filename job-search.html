@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search - PEN-MIAH</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#2596be">
+</head>
+<body>
+    <!-- Sticky Header -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-line1">PEN-MIAH</span>
+                    <span class="logo-line2">JOBS AND TRAINING</span>
+                </span>
+            </div>
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu-desktop">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#training">Training</a></li>
+                <li><a href="index.html#clients">Clients</a></li>
+                <li><a href="job-search.html">Job Search</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="advertise.html">Advertise</a></li>
+                <li class="dropdown">
+                    <a href="resources.html">Resources <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="article1.html">5 Interview Tips</a></li>
+                        <li><a href="article2.html">Work Ethics Matter</a></li>
+                        <li><a href="article3.html">Career Growth</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Full-screen Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-menu-items">
+            <li><a href="index.html#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="index.html#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <li><a href="index.html#clients"><i class="fas fa-handshake"></i> Clients</a></li>
+            <li><a href="job-search.html"><i class="fas fa-briefcase"></i> Job Search</a></li>
+            <li><a href="index.html#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="advertise.html"><i class="fas fa-ad"></i> Advertise</a></li>
+            <li class="mobile-dropdown">
+                <a href="#"><i class="fas fa-book-open"></i> Resources <i class="fas fa-chevron-down"></i></a>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="article1.html">5 Interview Tips</a></li>
+                    <li><a href="article2.html">Work Ethics Matter</a></li>
+                    <li><a href="article3.html">Career Growth</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Find Your Next Job</h1>
+                <p>Search and apply for positions that match your skills.</p>
+            </div>
+        </section>
+
+        <!-- Search / Filter Bar -->
+        <section class="job-search-bar">
+            <div class="container">
+                <form id="jobFilterForm">
+                    <input type="text" id="keyword" placeholder="Job title or keyword">
+                    <input type="text" id="location" placeholder="Location">
+                    <select id="category">
+                        <option value="">All Categories</option>
+                        <option value="Admin">Administration</option>
+                        <option value="Customer Service">Customer Service</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="IT">IT</option>
+                        <option value="Healthcare">Healthcare</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Job Listings -->
+        <section class="job-listings">
+            <div class="container">
+                <div id="jobsContainer" class="jobs-grid">
+                    <!-- Jobs will be loaded here via JavaScript -->
+                    <p>Loading jobs...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Modal / Form (hidden initially) -->
+        <div id="applyModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Apply for <span id="applyJobTitle"></span></h2>
+                <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_subject" value="Job Application">
+                    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+                    <input type="hidden" name="job_title" id="applyJobTitleInput">
+                    
+                    <input type="text" name="fullname" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <input type="number" name="age" placeholder="Age" required>
+                    <input type="text" name="education" placeholder="Highest Level of Education" required>
+                    <input type="text" name="position" placeholder="Position Applying For" required>
+                    <input type="url" name="cv_link" placeholder="Link to your CV (Google Drive, etc.)" required>
+                    <textarea name="cover" rows="4" placeholder="Cover Letter / Additional Info"></textarea>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>...</footer>
+
+    <!-- Google Sheets integration -->
+    <script>
+        // Replace with your published Google Sheets CSV URL
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=csv';
+
+        async function fetchJobs() {
+            const response = await fetch(SHEET_URL);
+            const csv = await response.text();
+            const jobs = parseCSV(csv);
+            displayJobs(jobs);
+        }
+
+        function parseCSV(csv) {
+            // Simple CSV parser (assuming headers: title,company,location,description,category)
+            const lines = csv.split('\n');
+            const headers = lines[0].split(',');
+            return lines.slice(1).map(line => {
+                const values = line.split(',');
+                return {
+                    title: values[0],
+                    company: values[1],
+                    location: values[2],
+                    description: values[3],
+                    category: values[4]
+                };
+            }).filter(job => job.title);
+        }
+
+        function displayJobs(jobs) {
+            const container = document.getElementById('jobsContainer');
+            container.innerHTML = '';
+            jobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <p class="company">${job.company}</p>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> ${job.location}</p>
+                    <p class="description">${job.description}</p>
+                    <button class="btn-small apply-btn" data-title="${job.title}">Apply Now</button>
+                `;
+                container.appendChild(card);
+            });
+            attachApplyButtons();
+        }
+
+        function attachApplyButtons() {
+            document.querySelectorAll('.apply-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const title = e.target.dataset.title;
+                    document.getElementById('applyJobTitle').innerText = title;
+                    document.getElementById('applyJobTitleInput').value = title;
+                    document.getElementById('applyModal').style.display = 'block';
+                });
+            });
+        }
+
+        // Filtering
+        document.getElementById('jobFilterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const keyword = document.getElementById('keyword').value.toLowerCase();
+            const location = document.getElementById('location').value.toLowerCase();
+            const category = document.getElementById('category').value;
+            // Re-fetch and filter (or filter already fetched jobs)
+            // For simplicity, we assume jobs are stored globally
+            if (window.allJobs) {
+                const filtered = window.allJobs.filter(job => 
+                    (keyword === '' || job.title.toLowerCase().includes(keyword) || job.description.toLowerCase().includes(keyword)) &&
+                    (location === '' || job.location.toLowerCase().includes(location)) &&
+                    (category === '' || job.category === category)
+                );
+                displayJobs(filtered);
+            }
+        });
+
+        // Modal close
+        document.querySelector('.close').onclick = () => {
+            document.getElementById('applyModal').style.display = 'none';
+        };
+        window.onclick = (e) => {
+            if (e.target == document.getElementById('applyModal')) {
+                document.getElementById('applyModal').style.display = 'none';
+            }
+        };
+
+        // Initial load
+        fetchJobs().then(jobs => { window.allJobs = jobs; });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
