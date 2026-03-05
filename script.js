@@ -31,14 +31,15 @@ menuLinks.forEach(link => {
             body.classList.remove('menu-open');
         }
 
-        // Smooth scroll with offset
+        // Smooth scroll with offset (handled by CSS scroll-padding-top)
+        // But we need to prevent default for anchor links
         const href = link.getAttribute('href');
         if (href && href.startsWith('#')) {
             e.preventDefault();
-            const targetId = href.substring(1);
+            const targetId = href.substring(1); // remove #
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
-                const headerOffset = 80;
+                const headerOffset = 80; // matches scroll-padding-top
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -53,6 +54,7 @@ menuLinks.forEach(link => {
 
 // ===== CLOSE MENU WHEN CLICKING OUTSIDE (on overlay background) =====
 mobileMenu.addEventListener('click', (e) => {
+    // If the clicked element is the overlay itself (not a child), close menu
     if (e.target === mobileMenu) {
         hamburger.classList.remove('active');
         mobileMenu.classList.remove('open');
@@ -60,7 +62,7 @@ mobileMenu.addEventListener('click', (e) => {
     }
 });
 
-// ===== ACTIVE LINK HIGHLIGHT ON SCROLL =====
+// ===== ACTIVE LINK HIGHLIGHT ON SCROLL (optional) =====
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
     let current = '';
@@ -68,7 +70,7 @@ window.addEventListener('scroll', () => {
     const headerHeight = header.offsetHeight;
 
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - headerHeight - 20;
+        const sectionTop = section.offsetTop - headerHeight - 20; // offset
         const sectionBottom = sectionTop + section.offsetHeight;
         if (scrollY >= sectionTop && scrollY < sectionBottom) {
             current = section.getAttribute('id');
@@ -84,7 +86,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// ===== CONTACT FORM PLACEHOLDER =====
+// ===== CONTACT FORM PLACEHOLDER (no actual submission) =====
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -93,3 +95,11 @@ if (contactForm) {
         contactForm.reset();
     });
 }
+
+// Mobile dropdown toggle
+document.querySelectorAll('.mobile-dropdown > a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+    });
+});
