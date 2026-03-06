@@ -86,15 +86,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// ===== CONTACT FORM PLACEHOLDER (no actual submission) =====
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for reaching out! We will get back to you soon. (This is a demo form)');
-        contactForm.reset();
-    });
-}
+
 
 // Mobile dropdown toggle
 document.querySelectorAll('.mobile-dropdown > a').forEach(link => {
