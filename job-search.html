@@ -108,24 +108,22 @@
             </div>
         </section>
 
-        <!-- Job Listings -->
-        <section class="job-listings">
-            <div class="container">
-                <div id="jobsContainer" class="jobs-grid">
-                    <!-- Jobs will be loaded here via JavaScript -->
-                    <p>Loading jobs...</p>
-                </div>
+        <div id="jobsContainer" class="jobs-grid">
+            <!-- Spinner shown while loading -->
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p>Loading jobs...</p>
             </div>
-        </section>
+        </div>
 
         <!-- Application Modal / Form (hidden initially) -->
         <div id="applyModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Apply for <span id="applyJobTitle"></span></h2>
-                <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                <form action="https://formsubmit.co/info@penmiahjobs.com" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_subject" value="Job Application">
-                    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+                    <input type="hidden" name="_next" value="https://penmiahjobs.com/thank-you.html">
                     <input type="hidden" name="job_title" id="applyJobTitleInput">
                     
                     <input type="text" name="fullname" placeholder="Full Name" required>
@@ -142,38 +140,105 @@
         </div>
     </main>
 
-    <footer>...</footer>
+    <!-- Footer -->
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: About -->
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" style="max-height: 50px; width: auto;">
+                    </div>
+                    <p class="footer-about">Your trusted partner in recruitment and training since 2008. We connect talent with opportunity.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#hero">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#training">Training</a></li>
+                        <li><a href="index.html#clients">Clients</a></li>
+                        <li><a href="job-search.html">Job Search</a></li>
+                        <li><a href="advertise.html">Advertise</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Resources -->
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="resources.html">Blog & Articles</a></li>
+                        <li><a href="article1.html">Interview Tips</a></li>
+                        <li><a href="article2.html">Work Ethics</a></li>
+                        <li><a href="article3.html">Career Growth</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> House 5, Zone B, Apo resettlement, Abuja, Nigeria</li>
+                        <li><i class="fas fa-phone-alt"></i> +234 903 691 3002</li>
+                        <li><i class="fas fa-envelope"></i> info@penmiahjobs.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PEN-MIAH JOBS AND TRAINING. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Google Sheets integration -->
     <script>
-        // Replace with your published Google Sheets CSV URL
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=csv';
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXPg1hp3PRtUHWrUAJc5m0s3zpg205Y11DOBNBn6d6-J-rcAgESm2txa-HhaQlncL83cuV5_n7tdwe/pub?output=csv';
+
+        let allJobs = [];
 
         async function fetchJobs() {
-            const response = await fetch(SHEET_URL);
-            const csv = await response.text();
-            const jobs = parseCSV(csv);
-            displayJobs(jobs);
+            try {
+                const response = await fetch(SHEET_URL);
+                const csv = await response.text();
+                allJobs = parseCSV(csv);
+                displayJobs(allJobs);
+            } catch (error) {
+                console.error('Failed to load jobs:', error);
+                document.getElementById('jobsContainer').innerHTML = '<p class="error">Unable to load jobs. Please try again later.</p>';
+            }
         }
 
         function parseCSV(csv) {
-            // Simple CSV parser (assuming headers: title,company,location,description,category)
-            const lines = csv.split('\n');
-            const headers = lines[0].split(',');
+            const lines = csv.split('\n').filter(line => line.trim() !== '');
+            const headers = lines[0].split(',').map(h => h.trim());
             return lines.slice(1).map(line => {
-                const values = line.split(',');
+                const values = line.split(',').map(v => v.trim());
                 return {
-                    title: values[0],
-                    company: values[1],
-                    location: values[2],
-                    description: values[3],
-                    category: values[4]
+                    title: values[0] || '',
+                    company: values[1] || '',
+                    location: values[2] || '',
+                    description: values[3] || '',
+                    category: values[4] || ''
                 };
             }).filter(job => job.title);
         }
 
         function displayJobs(jobs) {
             const container = document.getElementById('jobsContainer');
+            if (jobs.length === 0) {
+                container.innerHTML = '<p class="no-jobs">No jobs match your criteria.</p>';
+                return;
+            }
             container.innerHTML = '';
             jobs.forEach(job => {
                 const card = document.createElement('div');
@@ -207,16 +272,13 @@
             const keyword = document.getElementById('keyword').value.toLowerCase();
             const location = document.getElementById('location').value.toLowerCase();
             const category = document.getElementById('category').value;
-            // Re-fetch and filter (or filter already fetched jobs)
-            // For simplicity, we assume jobs are stored globally
-            if (window.allJobs) {
-                const filtered = window.allJobs.filter(job => 
-                    (keyword === '' || job.title.toLowerCase().includes(keyword) || job.description.toLowerCase().includes(keyword)) &&
-                    (location === '' || job.location.toLowerCase().includes(location)) &&
-                    (category === '' || job.category === category)
-                );
-                displayJobs(filtered);
-            }
+
+            const filtered = allJobs.filter(job => 
+                (keyword === '' || job.title.toLowerCase().includes(keyword) || job.description.toLowerCase().includes(keyword)) &&
+                (location === '' || job.location.toLowerCase().includes(location)) &&
+                (category === '' || job.category === category)
+            );
+            displayJobs(filtered);
         });
 
         // Modal close
@@ -230,7 +292,7 @@
         };
 
         // Initial load
-        fetchJobs().then(jobs => { window.allJobs = jobs; });
+        fetchJobs();
     </script>
     <script src="script.js"></script>
 </body>
