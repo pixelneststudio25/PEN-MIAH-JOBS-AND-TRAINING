@@ -18,4 +18,6 @@ collections:
       - { label: "Category", name: "category", widget: "select", options: ["Interview Tips", "Work Ethics", "Career Advice", "Workplace Culture"] }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+
       - { label: "Body", name: "body", widget: "markdown" }
+      
