@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - PEN-MIAH</title>
+    <!-- same head -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script> <!-- for markdown conversion -->
+</head>
+<body>
+    <header id="header">...</header>
+    <div class="mobile-menu-overlay">...</div>
+
+    <main>
+        <div class="container" id="articleContainer">
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p>Loading article...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="premium-footer">...</footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('slug');
+
+        async function loadArticle() {
+            if (!slug) {
+                document.getElementById('articleContainer').innerHTML = '<p>Article not found.</p>';
+                return;
+            }
+            try {
+                // Fetch the markdown file from content/articles/{slug}.md
+                const response = await fetch(`content/articles/${slug}.md`);
+                if (!response.ok) throw new Error('Not found');
+                const markdown = await response.text();
+
+                // Parse frontmatter (simple split – for production use gray-matter)
+                const parts = markdown.split('---');
+                const frontmatter = parts[1];
+                const content = parts.slice(2).join('---');
+
+                // Convert markdown to HTML
+                const converter = new showdown.Converter();
+                const htmlContent = converter.makeHtml(content);
+
+                // Parse frontmatter (very basic, you can improve)
+                const titleMatch = frontmatter.match(/title:\s*(.+)/);
+                const dateMatch = frontmatter.match(/date:\s*(.+)/);
+                const authorMatch = frontmatter.match(/author:\s*(.+)/);
+                const categoryMatch = frontmatter.match(/category:\s*(.+)/);
+                const imageMatch = frontmatter.match(/image:\s*(.+)/);
+
+                document.getElementById('articleContainer').innerHTML = `
+                    <article class="full-article">
+                        <h1>${titleMatch ? titleMatch[1] : 'Untitled'}</h1>
+                        <div class="meta">
+                            <span><i class="far fa-calendar-alt"></i> ${dateMatch ? dateMatch[1] : ''}</span>
+                            <span><i class="fas fa-user"></i> ${authorMatch ? authorMatch[1] : 'PEN-MIAH'}</span>
+                            <span><i class="fas fa-tag"></i> ${categoryMatch ? categoryMatch[1] : ''}</span>
+                        </div>
+                        ${imageMatch ? `<img src="${imageMatch[1].trim()}" alt="Featured image">` : ''}
+                        <div class="article-body">${htmlContent}</div>
+                        <a href="magazine.html" class="btn btn-secondary">← Back to Magazine</a>
+                    </article>
+                `;
+            } catch (error) {
+                document.getElementById('articleContainer').innerHTML = '<p class="error">Article not found.</p>';
+            }
+        }
+
+        loadArticle();
+    </script>
+</body>
+</html>

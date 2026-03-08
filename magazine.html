@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer & Employee Magazine - PEN-MIAH</title>
+    <!-- same head as other pages -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- favicon etc -->
+</head>
+<body>
+    <header id="header">...</header> <!-- copy from index.html -->
+    <div class="mobile-menu-overlay" id="mobileMenu">...</div>
+
+    <main>
+        <section class="magazine-hero">
+            <div class="container">
+                <h1>Employer & Employee Magazine</h1>
+                <p>Insights, advice, and stories for the modern workplace.</p>
+            </div>
+        </section>
+
+        <!-- Category filters -->
+        <div class="container">
+            <div class="category-filters" id="magazineFilters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="Interview Tips">Interview Tips</button>
+                <button class="filter-btn" data-category="Work Ethics">Work Ethics</button>
+                <button class="filter-btn" data-category="Career Advice">Career Advice</button>
+                <button class="filter-btn" data-category="Workplace Culture">Workplace Culture</button>
+            </div>
+        </div>
+
+        <section class="magazine-grid">
+            <div class="container" id="magazineContainer">
+                <!-- Spinner -->
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                    <p>Loading articles...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="premium-footer">...</footer>
+
+    <script>
+        // Fetch articles from a JSON index (we'll generate this index automatically)
+        async function fetchArticles() {
+            try {
+                const response = await fetch('articles-index.json');
+                const articles = await response.json();
+                displayArticles(articles);
+            } catch (error) {
+                document.getElementById('magazineContainer').innerHTML = '<p class="error">Failed to load articles.</p>';
+            }
+        }
+
+        function displayArticles(articles, category = 'all') {
+            const container = document.getElementById('magazineContainer');
+            const filtered = category === 'all' ? articles : articles.filter(a => a.category === category);
+            if (filtered.length === 0) {
+                container.innerHTML = '<p class="no-jobs">No articles in this category yet.</p>';
+                return;
+            }
+            container.innerHTML = filtered.map(article => `
+                <div class="magazine-card">
+                    <img src="${article.image}" alt="${article.title}">
+                    <div class="content">
+                        <span class="category">${article.category}</span>
+                        <h3>${article.title}</h3>
+                        <p class="date"><i class="far fa-calendar-alt"></i> ${article.date}</p>
+                        <p class="excerpt">${article.excerpt || ''}</p>
+                        <a href="article.html?slug=${article.slug}" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtering
+        document.querySelectorAll('#magazineFilters .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#magazineFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Re‑display with selected category (you'll need to store articles globally)
+                if (window.allArticles) {
+                    displayArticles(window.allArticles, btn.dataset.category);
+                }
+            });
+        });
+
+        fetchArticles().then(articles => { window.allArticles = articles; });
+    </script>
+</body>
+</html>
