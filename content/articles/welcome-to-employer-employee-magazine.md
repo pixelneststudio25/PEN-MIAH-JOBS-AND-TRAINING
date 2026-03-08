@@ -2,7 +2,7 @@
 title: Welcome to Employer & Employee Magazine
 author: PEN-MIAH
 date: 2026-03-08
-category: Work Ethics
+category: Career Advice
 image: /images/uploads/employer-employee1.png
 excerpt: |-
   The Genesis of this unique Magazine.
