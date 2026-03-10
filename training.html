@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen‑Miah Free Training</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#2596be">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+    <style>
+        body { font-family: Montserrat; padding: 2rem; }
+        .container { max-width: 600px; margin: auto; text-align: center; }
+        button { padding: 10px 20px; background: #4285f4; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <h1>Welcome to Pen‑Miah Free Training</h1>
+        <div id="loginSection">
+            <p>Sign in with Google to start learning.</p>
+            <button id="googleSignIn">Sign in with Google</button>
+        </div>
+        <div id="dashboard" style="display: none;">
+            <h2>Your Progress</h2>
+            <p>Signed in as: <span id="userEmail"></span></p>
+            <ul id="topicList" style="list-style: none; padding: 0;">
+                <!-- topics will appear here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Replace with your Firebase config
+        const firebaseConfig = {
+          apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
+          authDomain: "penmiah-work-ethics-program.firebaseapp.com",
+          projectId: "penmiah-work-ethics-program",
+          storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
+          messagingSenderId: "28914593791",
+          appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
+          measurementId: "G-6Z69PYMMG5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Topics list (keep in sync with your lessons)
+        const topics = [
+            { id: 'lesson1', title: 'Personal Leadership' },
+            { id: 'lesson2', title: 'Emotional Intelligence' },
+            { id: 'lesson3', title: 'People Skills' }
+        ];
+
+        // Google Sign-In
+        document.getElementById('googleSignIn').onclick = () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider);
+        };
+
+        // Handle auth state
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('userEmail').textContent = user.email;
+
+                // Get or create user progress document
+                const userRef = db.collection('progress').doc(user.uid);
+                const doc = await userRef.get();
+                if (!doc.exists) {
+                    await userRef.set({ email: user.email });
+                }
+
+                // Display topics with completion status
+                const userData = (await userRef.get()).data();
+                const list = document.getElementById('topicList');
+                list.innerHTML = '';
+                for (let topic of topics) {
+                    const completed = userData[topic.id] || false;
+                    list.innerHTML += `
+                        <li style="margin: 15px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <strong>${topic.title}</strong>
+                            ${completed ? '✅ Completed' : '❌ Not started'}
+                            <br>
+                            <a href="${topic.id}.html" style="display: inline-block; margin-top: 10px; padding: 5px 15px; background: #34a853; color: white; text-decoration: none; border-radius: 5px;">Start Lesson</a>
+                        </li>
+                    `;
+                }
+            } else {
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('dashboard').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

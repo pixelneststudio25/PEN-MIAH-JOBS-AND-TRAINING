@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Leadership – Lesson</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#2596be">
+    <!-- Firebase SDKs (same as above) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+    <style>
+        body { font-family: Montserrat; padding: 2rem; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; }
+        button { padding: 10px 20px; background: #34a853; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Personal Leadership</h1>
+
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Leadership" style="width:100%; border-radius:10px; margin:20px 0;">
+
+        <h2>Definition</h2>
+        <p>Personal leadership is the leadership of the self. It is the ability to define a direction for your leadership and life, and to move in that direction with consistency and clarity. Leading yourself means applying these same principles of leadership to your role as a leader and your life.</p>
+
+        <h3>Personal Leadership Includes:</h3>
+        <ul>
+            <li><strong>Personal Values:</strong> Values you might want to express include professionalism, respect, trust, excellence and quality. Identify what you value the most about your goals and what your customers or employees will value. Think about the kind of person you need to be to achieve your goals and what you must believe in order to accomplish them.</li>
+            <li><strong>Self image:</strong> Your self-image is a mental picture of yourself, both as a physical body and an individual. When you think about yourself, the feelings and images that come up are important. A healthy body image means that you see yourself as you really are and that you feel good in your own skin.
+                <ol>
+                    <li>You need to honestly evaluate your self image. <em>What do I really think about myself?</em></li>
+                    <li>Determine the ideal self image you want to possess and portray.</li>
+                    <li>Fill in the gap – work on building your self image to your desired goal.</li>
+                </ol>
+            </li>
+            <li><strong>The concept of “most dominant thought”:</strong> Your life is a product of your most dominant thoughts. Your thoughts got you to where you are. Thoughts are like an Internal Operating System.
+                <ol>
+                    <li>Be aware of what you are thinking. It is a practiced art developed over time.</li>
+                    <li>Fill your mind with good thoughts/content – food for the soul.</li>
+                    <li>Learn to constantly organize your thoughts.</li>
+                </ol>
+            </li>
+        </ul>
+
+        <h3>My Personal Leadership Development Plan</h3>
+        <div class="exercise-box">
+            <p><strong>1: My thoughts about good leadership</strong></p>
+            <p>_________________________________________</p>
+            <p><strong>2: My thoughts about myself.</strong></p>
+            <p>_________________________________________</p>
+            <p><strong>3. My Core Values.</strong><br>It’s important to me that......</p>
+            <p>_________________________________________</p>
+            <p><strong>4: Describe my ideal life. (Personal Vision Statement)</strong></p>
+            <p>_________________________________________</p>
+            <p><strong>5. What others think of me</strong></p>
+            <p>_________________________________________</p>
+            <p><strong>6: My Strengths</strong></p>
+            <p>_________________________________________</p>
+            <p><strong>7. My weaknesses</strong></p>
+            <p>_________________________________________</p>
+            <p><strong>8: Goals for my life</strong></p>
+            <p>_________________________________________</p>
+            <p><strong>9: Write an Action Plan.</strong></p>
+            <p>_________________________________________</p>
+        </div>
+        <div style="margin-top: 40px;">
+            <p>After studying this lesson, take the quiz:</p>
+            <a href="https://forms.google.com/your-quiz-link" target="_blank">📝 Take Quiz</a>
+            <br><br>
+            <button id="markComplete">✅ I have completed this lesson and quiz</button>
+            <p id="message" style="color: green;"></p>
+        </div>
+        <p><a href="training.html">← Back to Dashboard</a></p>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
+          authDomain: "penmiah-work-ethics-program.firebaseapp.com",
+          projectId: "penmiah-work-ethics-program",
+          storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
+          messagingSenderId: "28914593791",
+          appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
+          measurementId: "G-6Z69PYMMG5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) {
+                // Redirect to login if not signed in
+                window.location.href = 'training.html';
+                return;
+            }
+
+            document.getElementById('markComplete').onclick = async () => {
+                await db.collection('progress').doc(user.uid).update({
+                    lesson1: true  // adjust for each lesson
+                });
+                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
+            };
+        });
+    </script>
+</body>
+</html>
