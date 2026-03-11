@@ -1,99 +1,449 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Leadership – Lesson</title>
-    <!-- Google Fonts + Font Awesome -->
+    <title>Personal Leadership – Lesson | PEN-MIAH</title>
+    <!-- Google Fonts + Font Awesome (same as original) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- original style.css (kept, we'll add lesson-specific overrides) -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Favicon -->
+    <!-- Favicon (same as original) -->
     <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
     <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="theme-color" content="#2596be">
-    <!-- Firebase SDKs (same as above) -->
+
+    <!-- Firebase SDKs (same) -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+    <!-- Additional professional styling for lesson content (added) -->
     <style>
-        body { font-family: Montserrat; padding: 2rem; line-height: 1.6; }
-        .container { max-width: 800px; margin: auto; }
-        button { padding: 10px 20px; background: #34a853; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        /* Lesson page refinements – clean, spacious, professional */
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+
+        .lesson-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1e2b3c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            border-left: 8px solid #2596be;
+            padding-left: 1.5rem;
+        }
+
+        .lead-image {
+            width: 100%;
+            border-radius: 20px;
+            margin: 2rem 0 2.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15);
+        }
+
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,20,40,0.04);
+            border: 1px solid #eef2f6;
+            transition: box-shadow 0.2s;
+        }
+
+        .section-card:hover {
+            box-shadow: 0 18px 35px rgba(37,150,190,0.08);
+        }
+
+        .section-heading {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a3b4f;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-heading i {
+            color: #2596be;
+            font-size: 2rem;
+            width: 2rem;
+        }
+
+        .lead-text {
+            font-size: 1.18rem;
+            line-height: 1.7;
+            color: #2c3f4f;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 1.8rem;
+            border-bottom: 1px dashed #e0e8ef;
+            padding-bottom: 1.2rem;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list strong {
+            font-size: 1.25rem;
+            color: #1b4b6c;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .numbered-steps {
+            background: #f6faff;
+            padding: 1.5rem 2rem;
+            border-radius: 18px;
+            margin: 1.2rem 0;
+        }
+
+        .numbered-steps ol {
+            margin: 0.5rem 0 0 1.2rem;
+            padding-left: 0.5rem;
+        }
+
+        .numbered-steps li {
+            margin-bottom: 0.7rem;
+            font-weight: 450;
+            color: #1e3b4f;
+        }
+
+        .insight-box {
+            background: #f0f7fc;
+            border-left: 5px solid #2596be;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            font-style: normal;
+        }
+
+        .insight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* worksheet / plan items */
+        .plan-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .plan-item {
+            background: #f9fcff;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            border: 1px solid #dde7f0;
+        }
+
+        .plan-item p {
+            margin: 0 0 0.5rem 0;
+            font-weight: 600;
+            color: #1e3b4f;
+            font-size: 1.2rem;
+        }
+
+        .plan-line {
+            background: white;
+            border-radius: 40px;
+            height: 2.8rem;
+            width: 100%;
+            border: 1px solid #cbd6e3;
+            margin: 0.5rem 0 0.2rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* action buttons */
+        .action-group {
+            margin: 3rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .quiz-link {
+            background: #2596be;
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #2596be;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 16px -6px rgba(37,150,190,0.3);
+        }
+
+        .quiz-link i {
+            font-size: 1.2rem;
+        }
+
+        .quiz-link:hover {
+            background: #1c7a9c;
+            border-color: #1c7a9c;
+            box-shadow: 0 10px 20px -5px rgba(37,150,190,0.5);
+            transform: translateY(-2px);
+        }
+
+        .complete-btn {
+            background: #1e8f5e;
+            border: none;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 16px -6px rgba(30,143,94,0.3);
+            border: 1px solid #1e8f5e;
+        }
+
+        .complete-btn:hover {
+            background: #16734b;
+            border-color: #16734b;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px -6px rgba(30,143,94,0.4);
+        }
+
+        #message {
+            font-weight: 500;
+            margin-left: 0.5rem;
+            color: #1e8f5e;
+            background: #e2f3e9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 2rem 0 3rem;
+            color: #2c5777;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+
+        .back-link i {
+            margin-right: 0.4rem;
+        }
+
+        .back-link:hover {
+            border-bottom-color: #2596be;
+            color: #1a3f57;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b0ccdd, transparent);
+            margin: 2.5rem 0;
+        }
+
+        /* adjust original inline style for body */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fcfdff;
+            color: #1e2b3c;
+        }
     </style>
 </head>
 <body>
-    <h1>Personal Leadership</h1>
+    <!-- Sticky Header (exactly as original, with logo and menu) -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-line1">PEN-MIAH</span>
+                    <span class="logo-line2">JOBS AND TRAINING</span>
+                </span>
+            </div>
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu-desktop">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#training">Training</a></li>
+                <!--<li><a href="job-search.html">Job Search</a></li>-->
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="advertise.html">Advertise</a></li>
+                <li><a href="magazine.html">Magazine</a></li>
+            </ul>
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
 
-        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Leadership" style="width:100%; border-radius:10px; margin:20px 0;">
-
-        <h2>Definition</h2>
-        <p>Personal leadership is the leadership of the self. It is the ability to define a direction for your leadership and life, and to move in that direction with consistency and clarity. Leading yourself means applying these same principles of leadership to your role as a leader and your life.</p>
-
-        <h3>Personal Leadership Includes:</h3>
-        <ul>
-            <li><strong>Personal Values:</strong> Values you might want to express include professionalism, respect, trust, excellence and quality. Identify what you value the most about your goals and what your customers or employees will value. Think about the kind of person you need to be to achieve your goals and what you must believe in order to accomplish them.</li>
-            <li><strong>Self image:</strong> Your self-image is a mental picture of yourself, both as a physical body and an individual. When you think about yourself, the feelings and images that come up are important. A healthy body image means that you see yourself as you really are and that you feel good in your own skin.
-                <ol>
-                    <li>You need to honestly evaluate your self image. <em>What do I really think about myself?</em></li>
-                    <li>Determine the ideal self image you want to possess and portray.</li>
-                    <li>Fill in the gap – work on building your self image to your desired goal.</li>
-                </ol>
-            </li>
-            <li><strong>The concept of “most dominant thought”:</strong> Your life is a product of your most dominant thoughts. Your thoughts got you to where you are. Thoughts are like an Internal Operating System.
-                <ol>
-                    <li>Be aware of what you are thinking. It is a practiced art developed over time.</li>
-                    <li>Fill your mind with good thoughts/content – food for the soul.</li>
-                    <li>Learn to constantly organize your thoughts.</li>
-                </ol>
-            </li>
+    <!-- Full-screen Mobile Menu Overlay (unchanged) -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-menu-items">
+            <li><a href="index.html#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="index.html#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <!--<li><a href="job-search.html"><i class="fas fa-briefcase"></i> Job Search</a></li>-->
+            <li><a href="index.html#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="advertise.html"><i class="fas fa-ad"></i> Advertise</a></li>
+            <li><a href="magazine.html"><i class="fas fa-book-open"></i>Magazine</a></li>
         </ul>
-
-        <h3>My Personal Leadership Development Plan</h3>
-        <div class="exercise-box">
-            <p><strong>1: My thoughts about good leadership</strong></p>
-            <p>_________________________________________</p>
-            <p><strong>2: My thoughts about myself.</strong></p>
-            <p>_________________________________________</p>
-            <p><strong>3. My Core Values.</strong><br>It’s important to me that......</p>
-            <p>_________________________________________</p>
-            <p><strong>4: Describe my ideal life. (Personal Vision Statement)</strong></p>
-            <p>_________________________________________</p>
-            <p><strong>5. What others think of me</strong></p>
-            <p>_________________________________________</p>
-            <p><strong>6: My Strengths</strong></p>
-            <p>_________________________________________</p>
-            <p><strong>7. My weaknesses</strong></p>
-            <p>_________________________________________</p>
-            <p><strong>8: Goals for my life</strong></p>
-            <p>_________________________________________</p>
-            <p><strong>9: Write an Action Plan.</strong></p>
-            <p>_________________________________________</p>
-        </div>
-        <div style="margin-top: 40px;">
-            <p>After studying this lesson, take the quiz:</p>
-            <a href="https://forms.google.com/your-quiz-link" target="_blank">📝 Take Quiz</a>
-            <br><br>
-            <button id="markComplete">✅ I have completed this lesson and quiz</button>
-            <p id="message" style="color: green;"></p>
-        </div>
-        <p><a href="training.html">← Back to Dashboard</a></p>
     </div>
 
+    <!-- MAIN LESSON CONTENT (expanded & professionally styled) -->
+    <div class="lesson-container">
+        <h1 class="lesson-title">Personal Leadership</h1>
+
+        <!-- YouTube video embed: Everyday Leadership (Columbia Business School) -->
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; margin: 2rem 0 2.5rem; box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15);">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/REhahMfKECk?si=esmbBCwhz8Jn8ilg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <!-- Fallback clickable thumbnail (opens YouTube) -->
+        <a href="https://youtu.be/REhahMfKECk" target="_blank" rel="noopener" style="display: block; border-radius: 20px; overflow: hidden; margin: 2rem 0 2.5rem; box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15); transition: transform 0.2s;">
+            <img src="https://img.youtube.com/vi/REhahMfKECk/maxresdefault.jpg" alt="Everyday Leadership - Drew Dudley" style="width:100%; display: block;">
+        </a>
+        <!-- Definition & expanded content -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-compass"></i>
+                <span>Definition & Essence</span>
+            </div>
+            <p class="lead-text"><strong>Personal leadership</strong> is the discipline of leading oneself before leading others. It means intentionally setting a direction for your life and consistently aligning your actions with your values and purpose. It’s the foundation upon which all other leadership is built – you cannot inspire or guide others if you haven’t mastered your own inner world.</p>
+            <p class="lead-text">It involves self-awareness, emotional regulation, and the courage to hold yourself accountable. Personal leadership transforms “I hope” into “I will” and turns aspirations into daily practices.</p>
+        </div>
+
+        <!-- Core components (expanded) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-cubes"></i>
+                <span>Three Pillars of Personal Leadership</span>
+            </div>
+            <ul class="feature-list">
+                <li>
+                    <strong><i class="fas fa-heart" style="color:#2596be; width:1.8rem;"></i> Personal Values</strong>
+                    <p>Your values are your internal compass. They include integrity, excellence, respect, empathy, and growth. When you lead yourself, you continuously clarify what matters most. Ask: <em>“What principles will I never compromise?”</em> Write down your top five values and evaluate daily decisions against them.</p>
+                </li>
+                <li>
+                    <strong><i class="fas fa-user-circle" style="color:#2596be;"></i> Self‑image & Identity</strong>
+                    <p>Your self-image is the mental blueprint of who you believe you are. It dictates your confidence and limits. Follow this three‑step process to reshape it:</p>
+                    <div class="numbered-steps">
+                        <ol>
+                            <li><strong>Honest evaluation:</strong> What do I truly think about myself? What narratives play in my mind?</li>
+                            <li><strong>Ideal self:</strong> Describe the person you want to become – resilient, focused, compassionate.</li>
+                            <li><strong>Bridge the gap:</strong> Adopt small daily rituals that reflect your ideal self (affirmations, skill‑building, self‑care).</li>
+                        </ol>
+                    </div>
+                </li>
+                <li>
+                    <strong><i class="fas fa-brain" style="color:#2596be;"></i> Most Dominant Thought</strong>
+                    <p>Your life moves in the direction of your strongest, most repeated thoughts. Thoughts act as an operating system – they filter opportunities and shape reactions. To master them:</p>
+                    <div class="numbered-steps">
+                        <ol>
+                            <li><strong>Observe:</strong> Spend one week noting recurring thoughts. Identify patterns that either empower or limit you.</li>
+                            <li><strong>Curate input:</strong> Read, listen, and converse with intention. Feed your mind with material that aligns with your goals.</li>
+                            <li><strong>Organise & replace:</strong> When a disempowering thought appears, consciously replace it with a constructive one. Keep a thought journal.</li>
+                        </ol>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Why it matters – new section (expands content 1.5x) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-rocket"></i>
+                <span>Why Personal Leadership Matters</span>
+            </div>
+            <p class="lead-text">Without personal leadership, external chaos dictates your life. With it, you become the author of your story. Benefits include:</p>
+            <ul style="list-style-type: disc; padding-left: 2rem; margin-bottom: 1.2rem;">
+                <li><strong>Authenticity:</strong> Your actions reflect your true values, building trust with others.</li>
+                <li><strong>Resilience:</strong> When setbacks happen, you have an internal anchor to steady yourself.</li>
+                <li><strong>Influence:</strong> People follow those who demonstrate self‑mastery and clarity.</li>
+                <li><strong>Fulfillment:</strong> Aligning daily life with your purpose creates deep satisfaction.</li>
+            </ul>
+            <div class="insight-box">
+                <p><i class="fas fa-quote-left" style="color:#2596be; margin-right: 0.3rem;"></i> “Personal leadership is not about being the loudest in the room; it’s about being the most centred. It’s the quiet power of knowing who you are and where you’re going.”</p>
+            </div>
+        </div>
+
+        <!-- Personal Leadership Development Plan (styled elegantly) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-clipboard-list"></i>
+                <span>My Personal Leadership Development Plan</span>
+            </div>
+            <p class="lead-text" style="margin-bottom: 1.2rem;">Use the following prompts to reflect and create your own roadmap. Write freely – these notes will become your leadership guide.</p>
+
+            <div class="plan-grid">
+                <div class="plan-item"><p>1. My thoughts about good leadership</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>2. My thoughts about myself</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>3. My Core Values (It’s important to me that...)</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>4. Describe my ideal life (Personal Vision Statement)</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>5. What others think of me</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>6. My Strengths</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>7. My weaknesses</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>8. Goals for my life</p><div class="plan-line"></div></div>
+                <div class="plan-item"><p>9. Write an Action Plan (specific steps with deadlines)</p><div class="plan-line"></div></div>
+            </div>
+            <p style="color:#4d687e; margin-top: 1.2rem; font-style: italic;"><i class="fas fa-pencil-alt" style="margin-right: 0.5rem;"></i>Consider copying these into a dedicated journal and revisiting them monthly.</p>
+        </div>
+
+        <!-- Action group: quiz + completion button (emojis removed) -->
+        <div class="action-group">
+            <a href="https://forms.google.com/your-quiz-link" target="_blank" class="quiz-link">
+                <i class="fas fa-edit"></i> Take Quiz
+            </a>
+            <button id="markComplete" class="complete-btn">I have completed this lesson and quiz</button>
+            <span id="message"></span>
+        </div>
+
+        <hr>
+
+        <a href="training.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+
+    <!-- Firebase integration (unchanged functionality, no emojis) -->
     <script>
         const firebaseConfig = {
-          apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
-          authDomain: "penmiah-work-ethics-program.firebaseapp.com",
-          projectId: "penmiah-work-ethics-program",
-          storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
-          messagingSenderId: "28914593791",
-          appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
-          measurementId: "G-6Z69PYMMG5"
+            apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
+            authDomain: "penmiah-work-ethics-program.firebaseapp.com",
+            projectId: "penmiah-work-ethics-program",
+            storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
+            messagingSenderId: "28914593791",
+            appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
+            measurementId: "G-6Z69PYMMG5"
         };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
@@ -113,6 +463,18 @@
                 document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
             };
         });
+    </script>
+    <!-- NOTE: Hamburger menu functionality is assumed to exist in style.css or a separate script; if needed, include minimal script for toggle -->
+    <script>
+        // Minimal mobile menu toggle (preserving original behaviour)
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
     </script>
 </body>
 </html>
