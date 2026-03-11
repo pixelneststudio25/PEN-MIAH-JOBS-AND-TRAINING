@@ -19,10 +19,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="theme-color" content="#2596be">
 
-    <!-- Firebase SDKs (same) -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+    <!-- Firebase SDKs (compatibility versions) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 
     <!-- Additional professional styling for lesson content (added) -->
     <style>
@@ -328,14 +328,12 @@
 
         <!-- YouTube video embed: Everyday Leadership (Columbia Business School) -->
         <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; margin: 2rem 0 2.5rem; box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15);">
-            <iframe src="https://www.youtube.com/embed/REhahMfKECk?si=esmbBCwhz8Jn8ilg" 
-                title="Everyday Leadership - Drew Dudley" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
-            </iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/REhahMfKECk?si=esmbBCwhz8Jn8ilg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
+        <!-- Fallback clickable thumbnail (opens YouTube) -->
+        <a href="https://youtu.be/REhahMfKECk" target="_blank" rel="noopener" style="display: block; border-radius: 20px; overflow: hidden; margin: 2rem 0 2.5rem; box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15); transition: transform 0.2s;">
+            <img src="https://img.youtube.com/vi/REhahMfKECk/maxresdefault.jpg" alt="Everyday Leadership - Drew Dudley" style="width:100%; display: block;">
+        </a>
         <!-- Definition & expanded content -->
         <div class="section-card">
             <div class="section-heading">
@@ -435,8 +433,7 @@
 
         <a href="training.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
     </div>
-    
-    <script src="script.js"></script>
+
     <!-- Firebase integration (unchanged functionality, no emojis) -->
     <script>
         const firebaseConfig = {
@@ -481,5 +478,3 @@
     </script>
 </body>
 </html>
-
-
