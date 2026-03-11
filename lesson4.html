@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Effectiveness – Lesson | PEN-MIAH</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#2596be">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+    <!-- Additional professional styling for lesson content -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fcfdff;
+            color: #1e2b3c;
+            line-height: 1.6;
+        }
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .lesson-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1e2b3c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            border-left: 8px solid #2596be;
+            padding-left: 1.5rem;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 2rem 0 2.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,20,40,0.04);
+            border: 1px solid #eef2f6;
+            transition: box-shadow 0.2s;
+        }
+        .section-card:hover {
+            box-shadow: 0 18px 35px rgba(37,150,190,0.08);
+        }
+        .section-heading {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a3b4f;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-heading i {
+            color: #2596be;
+            font-size: 2rem;
+            width: 2rem;
+        }
+        .lead-text {
+            font-size: 1.18rem;
+            line-height: 1.7;
+            color: #2c3f4f;
+            margin-bottom: 1.5rem;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #e0e8ef;
+            padding-bottom: 1.5rem;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list strong {
+            font-size: 1.25rem;
+            color: #1b4b6c;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .numbered-steps {
+            background: #f6faff;
+            padding: 1.5rem 2rem;
+            border-radius: 18px;
+            margin: 1.2rem 0;
+        }
+        .numbered-steps ol {
+            margin: 0.5rem 0 0 1.2rem;
+            padding-left: 0.5rem;
+        }
+        .numbered-steps li {
+            margin-bottom: 0.7rem;
+            font-weight: 450;
+            color: #1e3b4f;
+        }
+        .insight-box {
+            background: #f0f7fc;
+            border-left: 5px solid #2596be;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+        .action-group {
+            margin: 3rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        .quiz-link {
+            background: #2596be;
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #2596be;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 16px -6px rgba(37,150,190,0.3);
+        }
+        .quiz-link i {
+            font-size: 1.2rem;
+        }
+        .quiz-link:hover {
+            background: #1c7a9c;
+            border-color: #1c7a9c;
+            box-shadow: 0 10px 20px -5px rgba(37,150,190,0.5);
+            transform: translateY(-2px);
+        }
+        .complete-btn {
+            background: #1e8f5e;
+            border: none;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 16px -6px rgba(30,143,94,0.3);
+            border: 1px solid #1e8f5e;
+        }
+        .complete-btn:hover {
+            background: #16734b;
+            border-color: #16734b;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px -6px rgba(30,143,94,0.4);
+        }
+        #message {
+            font-weight: 500;
+            margin-left: 0.5rem;
+            color: #1e8f5e;
+            background: #e2f3e9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 2rem 0 3rem;
+            color: #2c5777;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .back-link i {
+            margin-right: 0.4rem;
+        }
+        .back-link:hover {
+            border-bottom-color: #2596be;
+            color: #1a3f57;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b0ccdd, transparent);
+            margin: 2.5rem 0;
+        }
+        /* For long lists, use compact but readable style */
+        .compact-list {
+            columns: 2;
+            column-gap: 2rem;
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .compact-list li {
+            margin-bottom: 0.7rem;
+            break-inside: avoid;
+        }
+        @media (max-width: 600px) {
+            .compact-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header (exactly as original) -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-line1">PEN-MIAH</span>
+                    <span class="logo-line2">JOBS AND TRAINING</span>
+                </span>
+            </div>
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu-desktop">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#training">Training</a></li>
+                <!--<li><a href="job-search.html">Job Search</a></li>-->
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="advertise.html">Advertise</a></li>
+                <li><a href="magazine.html">Magazine</a></li>
+            </ul>
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Full-screen Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-menu-items">
+            <li><a href="index.html#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="index.html#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <li><a href="index.html#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="advertise.html"><i class="fas fa-ad"></i> Advertise</a></li>
+            <li><a href="magazine.html"><i class="fas fa-book-open"></i> Magazine</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN LESSON CONTENT (Professional Effectiveness) -->
+    <div class="lesson-container">
+        <h1 class="lesson-title">Professional Effectiveness</h1>
+
+        <!-- YouTube video embed (responsive) using the provided ID -->
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/T4CB5RPbtCk?si=cBwKgZUWfaaH6h6O" 
+                title="Professional Effectiveness - Key Habits" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Definition & expanded intro -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-briefcase"></i>
+                <span>What Does It Mean to Be a Professional?</span>
+            </div>
+            <p class="lead-text"><strong>Professional effectiveness</strong> is the ability to consistently deliver high-quality work while building trust and respect with colleagues, clients, and stakeholders. It goes beyond technical skills – it’s about how you show up, communicate, and handle responsibilities.</p>
+            <p class="lead-text">A profession is defined as “a paid occupation, especially one that involves prolonged training and a formal qualification.” Professionals are distinguished by their knowledge, but true effectiveness comes from the habits and behaviours that demonstrate reliability, respect, and competence.</p>
+        </div>
+
+        <!-- 25 Habits (expanded with explanations) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-clipboard-check"></i>
+                <span>25 Habits of Professionally Effective People</span>
+            </div>
+            <p class="lead-text">These habits separate the exceptional from the average. Read each one and reflect on how you can integrate it into your daily routine.</p>
+            <ul class="compact-list" style="list-style-type: decimal; padding-left: 1.8rem;">
+                <li><strong>Neat appearance</strong> – Dress appropriately; it signals respect for yourself and others.</li>
+                <li><strong>Always write</strong> – Take notes during meetings; it shows you value others’ input and helps you remember.</li>
+                <li><strong>Planning</strong> – Map out your day and priorities; don’t just react.</li>
+                <li><strong>Implementation</strong> – Execute your plans; ideas are worthless without action.</li>
+                <li><strong>Organize your work area</strong> – A tidy space reduces distractions and saves time.</li>
+                <li><strong>Communicate effectively</strong> – Be clear, concise, and considerate in all messages.</li>
+                <li><strong>Don't sit till you are asked to sit</strong> – Wait for an invitation; it shows deference in formal settings.</li>
+                <li><strong>Knock and wait to be asked to come in</strong> – Or ask “May I come in please?” – simple respect for others’ space.</li>
+                <li><strong>Excuse yourself before you leave</strong> – Don’t just vanish; let people know you’re stepping away.</li>
+                <li><strong>Send and use reminders</strong> – Keep yourself and others on track; follow up gently.</li>
+                <li><strong>Use the words: please, thank you, kindly, appreciate</strong> – Politeness costs nothing but builds goodwill.</li>
+                <li><strong>Know your trade</strong> – Continuously learn and stay updated in your field.</li>
+                <li><strong>Know your product</strong> – Understand what you’re offering inside and out.</li>
+                <li><strong>Take responsibility</strong> – Own your mistakes and fix them; don’t blame others.</li>
+                <li><strong>Keep your word and promises</strong> – Reliability is the foundation of trust.</li>
+                <li><strong>Don't answer phone calls in meetings</strong> – Say “I’ll call you back” and mean it.</li>
+                <li><strong>Return calls</strong> – Promptly respond to missed calls; it shows respect for others’ time.</li>
+                <li><strong>Respond to texts, chats, etc.</strong> – Even a quick “Got it, thanks” is better than silence.</li>
+                <li><strong>Be conscious of and excuse private conversations</strong> – If you must take a personal call, step away and say “I can’t talk right now.”</li>
+                <li><strong>Apologize</strong> – A sincere apology when you’ve caused trouble repairs relationships.</li>
+                <li><strong>Use of body language</strong> – Facial expressions, tone, posture, and eye contact convey as much as words.</li>
+                <li><strong>Understand generational gaps</strong> – Adapt your communication style to connect with different age groups.</li>
+                <li><strong>Take permission before you use someone's property</strong> – Borrowing without asking erodes trust.</li>
+            </ul>
+        </div>
+
+        <!-- Why these habits matter (new section) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-rocket"></i>
+                <span>Why Professional Effectiveness Matters</span>
+            </div>
+            <p class="lead-text">These habits aren’t just rules – they are signals of your character. When you consistently demonstrate professionalism, you:</p>
+            <ul style="list-style-type: disc; padding-left: 2rem;">
+                <li><strong>Build trust</strong> – People know they can rely on you.</li>
+                <li><strong>Enhance your reputation</strong> – Colleagues and leaders see you as competent and respectful.</li>
+                <li><strong>Reduce conflict</strong> – Clear communication and politeness prevent misunderstandings.</li>
+                <li><strong>Increase your influence</strong> – Others are more likely to listen to and support you.</li>
+                <li><strong>Open doors</strong> – Professionalism leads to recommendations, promotions, and opportunities.</li>
+            </ul>
+            <div class="insight-box">
+                <p><i class="fas fa-quote-left" style="color:#2596be;"></i> “Professionalism is not the job you do, it’s how you do the job.” – Unknown</p>
+            </div>
+        </div>
+
+        <!-- How to cultivate these habits (expanded) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-seedling"></i>
+                <span>How to Cultivate Professional Habits</span>
+            </div>
+            <p class="lead-text">Becoming professionally effective is a continuous process. Try these strategies:</p>
+            <ul style="list-style-type: disc; padding-left: 2rem;">
+                <li><strong>Pick 2-3 habits to focus on each week.</strong> Trying to change everything at once leads to burnout.</li>
+                <li><strong>Ask for feedback.</strong> A trusted mentor can point out blind spots.</li>
+                <li><strong>Observe role models.</strong> Notice how respected professionals handle meetings, emails, and stress.</li>
+                <li><strong>Keep a reflection journal.</strong> At the end of each day, note one professional win and one area to improve.</li>
+                <li><strong>Practice in low-stakes situations.</strong> Use polite language with cashiers, waitstaff, and family – it will become natural at work.</li>
+                <li><strong>Set reminders.</strong> Use your phone to prompt you to send follow-ups or use certain phrases.</li>
+            </ul>
+        </div>
+
+        <!-- Worksheet (development plan) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-clipboard-list"></i>
+                <span>My Professional Effectiveness Plan</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">1. Three habits from the list I already do well</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">2. Two habits I need to improve most</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">3. One specific action I will take this week</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">4. How I will remind myself to practice</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action buttons (no emojis) -->
+        <div class="action-group">
+            <a href="https://forms.google.com/your-quiz-link" target="_blank" class="quiz-link">
+                <i class="fas fa-edit"></i> Take Quiz
+            </a>
+            <button id="markComplete" class="complete-btn">I have completed this lesson and quiz</button>
+            <span id="message"></span>
+        </div>
+
+        <hr>
+
+        <a href="training.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+
+    <!-- Firebase integration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
+            authDomain: "penmiah-work-ethics-program.firebaseapp.com",
+            projectId: "penmiah-work-ethics-program",
+            storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
+            messagingSenderId: "28914593791",
+            appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
+            measurementId: "G-6Z69PYMMG5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) {
+                window.location.href = 'training.html';
+                return;
+            }
+
+            document.getElementById('markComplete').onclick = async () => {
+                await db.collection('progress').doc(user.uid).update({
+                    lesson4: true  // adjust for each lesson
+                });
+                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
+            };
+        });
+    </script>
+
+    <!-- Mobile menu toggle (simple) -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

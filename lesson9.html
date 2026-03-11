@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conflict Resolution – Lesson | PEN-MIAH</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#2596be">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+    <!-- Additional professional styling for lesson content -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fcfdff;
+            color: #1e2b3c;
+            line-height: 1.6;
+        }
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .lesson-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1e2b3c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            border-left: 8px solid #2596be;
+            padding-left: 1.5rem;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 2rem 0 2.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,20,40,0.04);
+            border: 1px solid #eef2f6;
+            transition: box-shadow 0.2s;
+        }
+        .section-card:hover {
+            box-shadow: 0 18px 35px rgba(37,150,190,0.08);
+        }
+        .section-heading {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a3b4f;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-heading i {
+            color: #2596be;
+            font-size: 2rem;
+            width: 2rem;
+        }
+        .lead-text {
+            font-size: 1.18rem;
+            line-height: 1.7;
+            color: #2c3f4f;
+            margin-bottom: 1.5rem;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #e0e8ef;
+            padding-bottom: 1.5rem;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list strong {
+            font-size: 1.25rem;
+            color: #1b4b6c;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .numbered-steps {
+            background: #f6faff;
+            padding: 1.5rem 2rem;
+            border-radius: 18px;
+            margin: 1.2rem 0;
+        }
+        .numbered-steps ol {
+            margin: 0.5rem 0 0 1.2rem;
+            padding-left: 0.5rem;
+        }
+        .numbered-steps li {
+            margin-bottom: 0.7rem;
+            font-weight: 450;
+            color: #1e3b4f;
+        }
+        .insight-box {
+            background: #f0f7fc;
+            border-left: 5px solid #2596be;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+        .action-group {
+            margin: 3rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        .quiz-link {
+            background: #2596be;
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #2596be;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 16px -6px rgba(37,150,190,0.3);
+        }
+        .quiz-link i {
+            font-size: 1.2rem;
+        }
+        .quiz-link:hover {
+            background: #1c7a9c;
+            border-color: #1c7a9c;
+            box-shadow: 0 10px 20px -5px rgba(37,150,190,0.5);
+            transform: translateY(-2px);
+        }
+        .complete-btn {
+            background: #1e8f5e;
+            border: none;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 16px -6px rgba(30,143,94,0.3);
+            border: 1px solid #1e8f5e;
+        }
+        .complete-btn:hover {
+            background: #16734b;
+            border-color: #16734b;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px -6px rgba(30,143,94,0.4);
+        }
+        #message {
+            font-weight: 500;
+            margin-left: 0.5rem;
+            color: #1e8f5e;
+            background: #e2f3e9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 2rem 0 3rem;
+            color: #2c5777;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .back-link i {
+            margin-right: 0.4rem;
+        }
+        .back-link:hover {
+            border-bottom-color: #2596be;
+            color: #1a3f57;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b0ccdd, transparent);
+            margin: 2.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header (exactly as original) -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-line1">PEN-MIAH</span>
+                    <span class="logo-line2">JOBS AND TRAINING</span>
+                </span>
+            </div>
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu-desktop">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#training">Training</a></li>
+                <!--<li><a href="job-search.html">Job Search</a></li>-->
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="advertise.html">Advertise</a></li>
+                <li><a href="magazine.html">Magazine</a></li>
+            </ul>
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Full-screen Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-menu-items">
+            <li><a href="index.html#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="index.html#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <li><a href="index.html#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="advertise.html"><i class="fas fa-ad"></i> Advertise</a></li>
+            <li><a href="magazine.html"><i class="fas fa-book-open"></i> Magazine</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN LESSON CONTENT (Conflict Resolution) -->
+    <div class="lesson-container">
+        <h1 class="lesson-title">Conflict Resolution</h1>
+
+        <!-- YouTube video embed (responsive) using the provided ID -->
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/zHXYWMnm7Yg?si=WOohr9cvmvGcFRRO" 
+                title="Conflict Resolution - How to Resolve Workplace Conflicts" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Definition & importance -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-handshake"></i>
+                <span>What Is Conflict Resolution?</span>
+            </div>
+            <p class="lead-text"><strong>Conflict resolution</strong> is the process by which two or more parties engaged in a disagreement, dispute, or debate reach an agreement that resolves it. It involves understanding the underlying interests, communicating effectively, and finding a mutually acceptable solution. Effective conflict resolution strengthens relationships, improves team dynamics, and saves time and resources.</p>
+            <p class="lead-text">Conflicts are inevitable in any organisation, but unresolved conflicts can lead to low morale, reduced productivity, and even reputational damage. Developing a mindset that sees conflict as an opportunity for growth is essential for leaders and team members alike.</p>
+        </div>
+
+        <!-- Steps to the Conflict Resolution Process (expanded) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-steps"></i>
+                <span>Steps to the Conflict Resolution Process</span>
+            </div>
+            <ol style="list-style-type: decimal; padding-left: 1.8rem; margin-bottom: 1rem;">
+                <li><strong>Clarify what the disagreement is.</strong> Ensure both parties articulate their perspectives without interruption. Ask open‑ended questions to uncover the root cause.</li>
+                <li><strong>Establish a common goal for both parties.</strong> Find shared interests – for example, “We both want the project to succeed.” This shifts focus from opposing positions to mutual benefit.</li>
+                <li><strong>Discuss ways to meet the common goal.</strong> Brainstorm possible solutions together. Encourage creativity and avoid judging ideas prematurely.</li>
+                <li><strong>Determine the barriers to the common goal.</strong> Identify obstacles – they could be resource constraints, miscommunication, or personal differences.</li>
+                <li><strong>Agree on the best way to resolve the conflict.</strong> Evaluate the options and choose one that addresses the key concerns of both parties.</li>
+                <li><strong>Keep it simple.</strong> Avoid overcomplicating the solution. A straightforward plan is easier to implement and maintain.</li>
+            </ol>
+            <div class="insight-box">
+                <p><i class="fas fa-quote-left" style="color:#2596be;"></i> “Never ignore conflicts. Develop a mindset that loves to resolve conflict. Conflicts resolved are very profitable and can save your organisation lots of time, money, energy, and reputation.”</p>
+            </div>
+        </div>
+
+        <!-- Additional conflict resolution styles (Thomas-Kilmann) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-balance-scale"></i>
+                <span>Five Conflict Handling Styles</span>
+            </div>
+            <p class="lead-text">Different situations call for different approaches. The Thomas‑Kilmann model outlines five common styles:</p>
+            <ul style="list-style-type: disc; padding-left: 2rem;">
+                <li><strong>Competing:</strong> Assertive, uncooperative – used when quick, decisive action is needed (e.g., emergencies).</li>
+                <li><strong>Collaborating:</strong> Assertive and cooperative – seeks a win‑win solution through open dialogue.</li>
+                <li><strong>Compromising:</strong> Moderate assertiveness and cooperation – each party gives something up to reach a middle ground.</li>
+                <li><strong>Avoiding:</strong> Unassertive, uncooperative – postponing or withdrawing from the conflict (useful when the issue is trivial).</li>
+                <li><strong>Accommodating:</strong> Unassertive, cooperative – prioritising the relationship over personal goals.</li>
+            </ul>
+            <p class="lead-text">Understanding these styles helps you choose the most effective approach for each situation.</p>
+        </div>
+
+        <!-- Using a Mediator -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-user-tie"></i>
+                <span>Using a Mediator for Workplace Conflict Resolution</span>
+            </div>
+            <p class="lead-text">When parties cannot resolve a conflict themselves, a mediator can help. A mediator is a neutral third party who facilitates communication and guides the process without imposing a solution.</p>
+            <p class="lead-text">Using a mediator does not mean you have to employ someone external. An internal employee who is not involved in the conflict can work just as well – a manager, HR representative, business coach, or trusted co‑worker. The mediator must be impartial and trusted by both sides.</p>
+        </div>
+
+        <!-- Tips for effective conflict resolution -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-lightbulb"></i>
+                <span>Tips for Successful Conflict Resolution</span>
+            </div>
+            <ul style="list-style-type: disc; padding-left: 2rem;">
+                <li><strong>Listen actively:</strong> Let each person speak without interruption. Show you understand by paraphrasing.</li>
+                <li><strong>Stay calm and respectful:</strong> Avoid raising your voice or using accusatory language.</li>
+                <li><strong>Focus on interests, not positions:</strong> Ask “why” to uncover underlying needs.</li>
+                <li><strong>Separate the person from the problem:</strong> Attack the issue, not the individual.</li>
+                <li><strong>Be willing to apologise:</strong> If you’ve contributed to the conflict, a sincere apology can defuse tension.</li>
+                <li><strong>Document the agreement:</strong> Write down the resolution and action steps to ensure accountability.</li>
+            </ul>
+        </div>
+
+        <!-- Worksheet (development plan) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-clipboard-list"></i>
+                <span>My Conflict Resolution Action Plan</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">1. A recent conflict I handled well – what worked?</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">2. A conflict I could have handled better – what would I do differently?</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">3. One conflict style I want to practice more (collaborating, compromising, etc.)</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">4. The next time I face a disagreement, I will…</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action buttons (no emojis) -->
+        <div class="action-group">
+            <a href="https://forms.google.com/your-quiz-link" target="_blank" class="quiz-link">
+                <i class="fas fa-edit"></i> Take Quiz
+            </a>
+            <button id="markComplete" class="complete-btn">I have completed this lesson and quiz</button>
+            <span id="message"></span>
+        </div>
+
+        <hr>
+
+        <a href="training.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+
+    <!-- Firebase integration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
+            authDomain: "penmiah-work-ethics-program.firebaseapp.com",
+            projectId: "penmiah-work-ethics-program",
+            storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
+            messagingSenderId: "28914593791",
+            appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
+            measurementId: "G-6Z69PYMMG5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) {
+                window.location.href = 'training.html';
+                return;
+            }
+
+            document.getElementById('markComplete').onclick = async () => {
+                await db.collection('progress').doc(user.uid).update({
+                    lesson9: true  // adjust for each lesson
+                });
+                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
+            };
+        });
+    </script>
+
+    <!-- Mobile menu toggle (simple) -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

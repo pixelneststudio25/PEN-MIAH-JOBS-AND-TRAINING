@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Management – Lesson | PEN-MIAH</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#2596be">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+    <!-- Additional professional styling for lesson content -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fcfdff;
+            color: #1e2b3c;
+            line-height: 1.6;
+        }
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .lesson-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1e2b3c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            border-left: 8px solid #2596be;
+            padding-left: 1.5rem;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 2rem 0 2.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,20,40,0.04);
+            border: 1px solid #eef2f6;
+            transition: box-shadow 0.2s;
+        }
+        .section-card:hover {
+            box-shadow: 0 18px 35px rgba(37,150,190,0.08);
+        }
+        .section-heading {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a3b4f;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-heading i {
+            color: #2596be;
+            font-size: 2rem;
+            width: 2rem;
+        }
+        .lead-text {
+            font-size: 1.18rem;
+            line-height: 1.7;
+            color: #2c3f4f;
+            margin-bottom: 1.5rem;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #e0e8ef;
+            padding-bottom: 1.5rem;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list strong {
+            font-size: 1.25rem;
+            color: #1b4b6c;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .numbered-steps {
+            background: #f6faff;
+            padding: 1.5rem 2rem;
+            border-radius: 18px;
+            margin: 1.2rem 0;
+        }
+        .numbered-steps ol {
+            margin: 0.5rem 0 0 1.2rem;
+            padding-left: 0.5rem;
+        }
+        .numbered-steps li {
+            margin-bottom: 0.7rem;
+            font-weight: 450;
+            color: #1e3b4f;
+        }
+        .insight-box {
+            background: #f0f7fc;
+            border-left: 5px solid #2596be;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+        .action-group {
+            margin: 3rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        .quiz-link {
+            background: #2596be;
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #2596be;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 16px -6px rgba(37,150,190,0.3);
+        }
+        .quiz-link i {
+            font-size: 1.2rem;
+        }
+        .quiz-link:hover {
+            background: #1c7a9c;
+            border-color: #1c7a9c;
+            box-shadow: 0 10px 20px -5px rgba(37,150,190,0.5);
+            transform: translateY(-2px);
+        }
+        .complete-btn {
+            background: #1e8f5e;
+            border: none;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 16px -6px rgba(30,143,94,0.3);
+            border: 1px solid #1e8f5e;
+        }
+        .complete-btn:hover {
+            background: #16734b;
+            border-color: #16734b;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px -6px rgba(30,143,94,0.4);
+        }
+        #message {
+            font-weight: 500;
+            margin-left: 0.5rem;
+            color: #1e8f5e;
+            background: #e2f3e9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 2rem 0 3rem;
+            color: #2c5777;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .back-link i {
+            margin-right: 0.4rem;
+        }
+        .back-link:hover {
+            border-bottom-color: #2596be;
+            color: #1a3f57;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b0ccdd, transparent);
+            margin: 2.5rem 0;
+        }
+        /* For lists with descriptions */
+        .quadrant-list {
+            list-style: none;
+            padding: 0;
+        }
+        .quadrant-list li {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header (exactly as original) -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-line1">PEN-MIAH</span>
+                    <span class="logo-line2">JOBS AND TRAINING</span>
+                </span>
+            </div>
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu-desktop">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#training">Training</a></li>
+                <!--<li><a href="job-search.html">Job Search</a></li>-->
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="advertise.html">Advertise</a></li>
+                <li><a href="magazine.html">Magazine</a></li>
+            </ul>
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Full-screen Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-menu-items">
+            <li><a href="index.html#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="index.html#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <li><a href="index.html#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="advertise.html"><i class="fas fa-ad"></i> Advertise</a></li>
+            <li><a href="magazine.html"><i class="fas fa-book-open"></i> Magazine</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN LESSON CONTENT (Time Management) -->
+    <div class="lesson-container">
+        <h1 class="lesson-title">Time Management</h1>
+
+        <!-- YouTube video embed (responsive) using the provided ID -->
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/xgp6eELYY1M?si=p9mQ5eoGFXlck2dV" 
+                title="Time Management - Stephen Covey's Quadrants" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Introduction -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-hourglass-half"></i>
+                <span>Why Time Management Matters</span>
+            </div>
+            <p class="lead-text"><strong>Time management</strong> is the process of planning and controlling how much time to spend on specific activities. Good time management enables you to work smarter – not harder – so that you get more done in less time, even when time is tight and pressures are high. It is a key skill for professional effectiveness and personal well‑being.</p>
+            <p class="lead-text">In this lesson, we explore two powerful frameworks: Stephen Covey’s Four Quadrants and the 80/20 Principle. Both help you focus on what truly matters and avoid getting lost in trivial tasks.</p>
+        </div>
+
+        <!-- The Four Quadrants (expanded) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-th"></i>
+                <span>The Four Quadrants of Time Management</span>
+            </div>
+            <p class="lead-text">Stephen Covey, author of <em>The 7 Habits of Highly Effective People</em>, introduced a matrix that categorises tasks based on urgency and importance. Understanding these quadrants helps you prioritise effectively.</p>
+            <ul class="quadrant-list">
+                <li><strong>Quadrant 1: Important and Urgent</strong> – Crises, deadlines, emergencies. These tasks demand immediate attention. While necessary, spending too much time here leads to stress and burnout.</li>
+                <li><strong>Quadrant 2: Important but Not Urgent</strong> – Planning, relationship building, personal development, prevention. This is the quadrant of quality and growth. Effective people spend most of their time here, reducing future crises.</li>
+                <li><strong>Quadrant 3: Not Important but Urgent</strong> – Interruptions, some emails, unnecessary meetings. These tasks feel urgent but don’t align with your goals. Learn to delegate or say no.</li>
+                <li><strong>Quadrant 4: Not Important and Not Urgent</strong> – Mindless scrolling, gossip, excessive TV. These are pure time wasters. Eliminate them.</li>
+            </ul>
+            <div>
+                <img src="Quadrants Time-management.png">
+            </div>
+            <div class="insight-box">
+                <p><i class="fas fa-quote-left" style="color:#2596be;"></i> “The key is not to prioritize what’s on your schedule, but to schedule your priorities.” – Stephen Covey</p>
+            </div>
+        </div>
+
+        <!-- 80/20 Principle -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-chart-pie"></i>
+                <span>The 80/20 Principle (Pareto Principle)</span>
+            </div>
+            <p class="lead-text">The 80/20 Principle states that, for many outcomes, roughly 80% of results come from 20% of efforts. In time management, this means a small portion of your activities produce the majority of your valuable results.</p>
+            <p class="lead-text"><strong>How to apply it:</strong> Identify the 20% of tasks that contribute most to your goals. Focus your energy there, and reduce or eliminate the low‑impact 80%.</p>
+        </div>
+
+        <!-- 7 Habits Summary (expanded with context) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-book"></i>
+                <span>The 7 Habits of Highly Effective People</span>
+            </div>
+            <p class="lead-text">Stephen Covey’s timeless framework integrates time management with character development. Here’s a brief overview:</p>
+            <ol style="list-style-type: decimal; padding-left: 1.8rem; margin-bottom: 1rem;">
+                <li><strong>Be Proactive</strong> – Take responsibility for your choices and actions. Focus on what you can influence.</li>
+                <li><strong>Begin with the End in Mind</strong> – Define your personal and professional mission. Let it guide your daily decisions.</li>
+                <li><strong>Put First Things First</strong> – Prioritise Quadrant 2 activities; do what matters most.</li>
+                <li><strong>Think Win/Win</strong> – Seek solutions that benefit all parties, building trust and collaboration.</li>
+                <li><strong>Seek First to Understand, Then to Be Understood</strong> – Listen empathetically before offering your perspective.</li>
+                <li><strong>Synergize</strong> – Combine strengths through teamwork to achieve more than you could alone.</li>
+                <li><strong>Sharpen the Saw</strong> – Regularly renew yourself in four dimensions: physical, mental, emotional, and spiritual.</li>
+            </ol>
+        </div>
+
+        <!-- Practical tips for applying these concepts -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-tasks"></i>
+                <span>Putting It Into Practice</span>
+            </div>
+            <ul style="list-style-type: disc; padding-left: 2rem;">
+                <li><strong>Start each day with a plan.</strong> List your top three Quadrant 2 tasks and tackle them first.</li>
+                <li><strong>Use a time log.</strong> Track how you spend your time for one week – you’ll likely spot patterns and time drains.</li>
+                <li><strong>Learn to say no.</strong> Politely decline requests that fall into Quadrant 3.</li>
+                <li><strong>Block out “deep work” periods.</strong> Protect uninterrupted time for your most important projects.</li>
+                <li><strong>Review weekly.</strong> Every Friday, reflect on what worked and what needs adjustment.</li>
+            </ul>
+        </div>
+
+        <!-- Worksheet (development plan) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-clipboard-list"></i>
+                <span>My Time Management Action Plan</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">1. One Quadrant 2 activity I will prioritise this week</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">2. A common Quadrant 3 interruption I can reduce</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">3. My biggest time waster (Quadrant 4) and how I’ll limit it</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+                <div style="background: #f9fcff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #dde7f0;">
+                    <p style="margin:0 0 0.5rem; font-weight:600;">4. How I will track my progress (e.g., time log, weekly review)</p>
+                    <div style="background:white; border-radius:40px; height:2.8rem; border:1px solid #cbd6e3;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action buttons (no emojis) -->
+        <div class="action-group">
+            <a href="https://forms.google.com/your-quiz-link" target="_blank" class="quiz-link">
+                <i class="fas fa-edit"></i> Take Quiz
+            </a>
+            <button id="markComplete" class="complete-btn">I have completed this lesson and quiz</button>
+            <span id="message"></span>
+        </div>
+
+        <hr>
+
+        <a href="training.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+
+    <!-- Firebase integration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
+            authDomain: "penmiah-work-ethics-program.firebaseapp.com",
+            projectId: "penmiah-work-ethics-program",
+            storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
+            messagingSenderId: "28914593791",
+            appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
+            measurementId: "G-6Z69PYMMG5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) {
+                window.location.href = 'training.html';
+                return;
+            }
+
+            document.getElementById('markComplete').onclick = async () => {
+                await db.collection('progress').doc(user.uid).update({
+                    lesson5: true  // adjust for each lesson
+                });
+                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
+            };
+        });
+    </script>
+
+    <!-- Mobile menu toggle (simple) -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
