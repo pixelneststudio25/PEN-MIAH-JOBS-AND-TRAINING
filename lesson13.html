@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning and Decision Making – Lesson | PEN-MIAH</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="PENMIAH-FAVICON.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="PENMIAH-FAVICON-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#2596be">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+    <!-- Additional professional styling for lesson content -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fcfdff;
+            color: #1e2b3c;
+            line-height: 1.6;
+        }
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .lesson-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1e2b3c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            border-left: 8px solid #2596be;
+            padding-left: 1.5rem;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 2rem 0 2.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0,50,80,0.15);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,20,40,0.04);
+            border: 1px solid #eef2f6;
+            transition: box-shadow 0.2s;
+        }
+        .section-card:hover {
+            box-shadow: 0 18px 35px rgba(37,150,190,0.08);
+        }
+        .section-heading {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a3b4f;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-heading i {
+            color: #2596be;
+            font-size: 2rem;
+            width: 2rem;
+        }
+        .lead-text {
+            font-size: 1.18rem;
+            line-height: 1.7;
+            color: #2c3f4f;
+            margin-bottom: 1.5rem;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #e0e8ef;
+            padding-bottom: 1.5rem;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list strong {
+            font-size: 1.25rem;
+            color: #1b4b6c;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .numbered-steps {
+            background: #f6faff;
+            padding: 1.5rem 2rem;
+            border-radius: 18px;
+            margin: 1.2rem 0;
+        }
+        .numbered-steps ol {
+            margin: 0.5rem 0 0 1.2rem;
+            padding-left: 0.5rem;
+        }
+        .numbered-steps li {
+            margin-bottom: 0.7rem;
+            font-weight: 450;
+            color: #1e3b4f;
+        }
+        .insight-box {
+            background: #f0f7fc;
+            border-left: 5px solid #2596be;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+        .action-group {
+            margin: 3rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        .quiz-link {
+            background: #2596be;
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #2596be;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 16px -6px rgba(37,150,190,0.3);
+        }
+        .quiz-link i {
+            font-size: 1.2rem;
+        }
+        .quiz-link:hover {
+            background: #1c7a9c;
+            border-color: #1c7a9c;
+            box-shadow: 0 10px 20px -5px rgba(37,150,190,0.5);
+            transform: translateY(-2px);
+        }
+        .complete-btn {
+            background: #1e8f5e;
+            border: none;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 16px -6px rgba(30,143,94,0.3);
+            border: 1px solid #1e8f5e;
+        }
+        .complete-btn:hover {
+            background: #16734b;
+            border-color: #16734b;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px -6px rgba(30,143,94,0.4);
+        }
+        #message {
+            font-weight: 500;
+            margin-left: 0.5rem;
+            color: #1e8f5e;
+            background: #e2f3e9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 2rem 0 3rem;
+            color: #2c5777;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .back-link i {
+            margin-right: 0.4rem;
+        }
+        .back-link:hover {
+            border-bottom-color: #2596be;
+            color: #1a3f57;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b0ccdd, transparent);
+            margin: 2.5rem 0;
+        }
+        .plan-item {
+            background: #f9fcff;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            border: 1px solid #dde7f0;
+        }
+        .plan-item p {
+            margin: 0 0 0.5rem 0;
+            font-weight: 600;
+            color: #1e3b4f;
+            font-size: 1.2rem;
+        }
+        .plan-line {
+            background: white;
+            border-radius: 40px;
+            height: 2.8rem;
+            width: 100%;
+            border: 1px solid #cbd6e3;
+            margin: 0.5rem 0 0.2rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header (exactly as original) -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="PEN-MIAH.png" alt="PEN-MIAH Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-line1">PEN-MIAH</span>
+                    <span class="logo-line2">JOBS AND TRAINING</span>
+                </span>
+            </div>
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu-desktop">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#training">Training</a></li>
+                <!--<li><a href="job-search.html">Job Search</a></li>-->
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="advertise.html">Advertise</a></li>
+                <li><a href="magazine.html">Magazine</a></li>
+            </ul>
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Full-screen Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-menu-items">
+            <li><a href="index.html#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="index.html#training"><i class="fas fa-chalkboard-teacher"></i> Training</a></li>
+            <li><a href="index.html#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="advertise.html"><i class="fas fa-ad"></i> Advertise</a></li>
+            <li><a href="magazine.html"><i class="fas fa-book-open"></i> Magazine</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN LESSON CONTENT (Planning and Decision Making) -->
+    <div class="lesson-container">
+        <h1 class="lesson-title">Planning and Decision Making</h1>
+
+        <!-- YouTube video embed (responsive) using the provided ID with start parameter -->
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/d7Jnmi2BkS8?si=iI-T6XNET1PG0KPw&amp;start=26" 
+                title="Planning and Decision Making" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Definition & importance of planning -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-clipboard-list"></i>
+                <span>What Is Planning?</span>
+            </div>
+            <p class="lead-text">A <strong>plan</strong> is a detailed proposal for doing or achieving something – an intention or decision about what one is going to do. Planning is the process of thinking through the entire journey, anticipating obstacles, and mapping out the steps needed to succeed. As the saying goes: <em>“What gets planned gets done. What gets written gets done. What gets talked about gets done. What gets trained for gets done.”</em></p>
+            <p class="lead-text">Planning and decision making work hand in hand. Effective planning involves answering questions like “what if?” and drawing clear mental pictures. The more detailed your plan, the greater your chance of success.</p>
+        </div>
+
+        <!-- Execution section -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-rocket"></i>
+                <span>Execution: Bringing Plans to Life</span>
+            </div>
+            <p class="lead-text"><strong>Execution</strong> is the carrying out of a plan, order, or course of action. A brilliant plan is worthless without proper execution. The time invested in planning pays off when execution becomes smoother and more focused.</p>
+        </div>
+
+        <!-- Ways to better execute (expanded) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-cogs"></i>
+                <span>5 Ways to Better Execute Your Plan</span>
+            </div>
+            <ul class="feature-list">
+                <li><strong>Sharpen your Focus</strong> – Focus provides the clarity needed to make decisions that support your most important goals. It creates a clearly defined pathway to success. However, plan realistically; an unrealistic plan will frustrate execution.</li>
+                <li><strong>Build your Competence</strong> – Competence here means having the right skills, knowledge, and resources. Assign tasks to people who are empowered and equipped to execute. Invest in training where gaps exist.</li>
+                <li><strong>Ignite your Passion</strong> – Passion creates a sense of connectedness and purpose. When people care deeply about the outcome, they go the extra mile.</li>
+                <li><strong>Do one thing at a time</strong> – Multitasking dilutes attention. Focus on completing one task before moving to the next. This increases quality and reduces errors.</li>
+                <li><strong>Give careful instructions</strong> – Ambiguity leads to mistakes. Provide clear, concise directions and check for understanding.</li>
+            </ul>
+        </div>
+
+        <!-- Decision-Making Process (new section) -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-balance-scale"></i>
+                <span>The Decision-Making Process</span>
+            </div>
+            <p class="lead-text">Effective decision making is integral to planning. Use these steps to make better decisions:</p>
+            <ol style="list-style-type: decimal; padding-left: 1.8rem;">
+                <li><strong>Identify the decision</strong> – Clearly define what you need to decide.</li>
+                <li><strong>Gather relevant information</strong> – Collect data, opinions, and feedback.</li>
+                <li><strong>Identify alternatives</strong> – Brainstorm multiple options.</li>
+                <li><strong>Weigh the evidence</strong> – Evaluate pros and cons of each alternative.</li>
+                <li><strong>Choose among alternatives</strong> – Select the option that best aligns with your goals.</li>
+                <li><strong>Take action</strong> – Implement your decision.</li>
+                <li><strong>Review your decision</strong> – Assess the outcome and learn for the future.</li>
+            </ol>
+        </div>
+
+        <!-- Worksheet: My Planning & Execution Action Plan -->
+        <div class="section-card">
+            <div class="section-heading">
+                <i class="fas fa-clipboard-list"></i>
+                <span>My Planning & Execution Action Plan</span>
+            </div>
+            <p class="lead-text">Use this worksheet to apply the concepts to a real project or goal.</p>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div class="plan-item">
+                    <p><strong>1. The goal I want to achieve:</strong></p>
+                    <div class="plan-line"></div>
+                </div>
+                <div class="plan-item">
+                    <p><strong>2. Key steps in my plan (at least three):</strong></p>
+                    <div class="plan-line"></div>
+                    <div class="plan-line" style="margin-top: 0.5rem;"></div>
+                    <div class="plan-line" style="margin-top: 0.5rem;"></div>
+                </div>
+                <div class="plan-item">
+                    <p><strong>3. Potential obstacles and how I'll overcome them:</strong></p>
+                    <div class="plan-line"></div>
+                </div>
+                <div class="plan-item">
+                    <p><strong>4. One way to sharpen focus during execution:</strong></p>
+                    <div class="plan-line"></div>
+                </div>
+                <div class="plan-item">
+                    <p><strong>5. How I will measure success:</strong></p>
+                    <div class="plan-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inspirational Quote -->
+        <div class="insight-box" style="margin: 1.5rem 0;">
+            <p><i class="fas fa-quote-left" style="color:#2596be; margin-right: 0.5rem;"></i> “A goal without a plan is just a wish.” – Antoine de Saint-Exupéry</p>
+        </div>
+
+        <!-- Action buttons (no emojis) -->
+        <div class="action-group">
+            <a href="https://forms.google.com/your-quiz-link" target="_blank" class="quiz-link">
+                <i class="fas fa-edit"></i> Take Quiz
+            </a>
+            <button id="markComplete" class="complete-btn">I have completed this lesson and quiz</button>
+            <span id="message"></span>
+        </div>
+
+        <hr>
+
+        <a href="training.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+    <script src="script.js"></script>
+
+    <!-- Firebase integration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
+            authDomain: "penmiah-work-ethics-program.firebaseapp.com",
+            projectId: "penmiah-work-ethics-program",
+            storageBucket: "penmiah-work-ethics-program.firebasestorage.app",
+            messagingSenderId: "28914593791",
+            appId: "1:28914593791:web:aadd9f0a4fa0531d1441ca",
+            measurementId: "G-6Z69PYMMG5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) {
+                window.location.href = 'training.html';
+                return;
+            }
+
+            document.getElementById('markComplete').onclick = async () => {
+                await db.collection('progress').doc(user.uid).update({
+                    lesson13: true  // adjust for each lesson
+                });
+                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
+            };
+        });
+    </script>
+
+    <!-- Mobile menu toggle (simple) -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
