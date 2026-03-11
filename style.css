@@ -1572,3 +1572,15 @@ body.menu-open {
         order: -1;
     }
 }
+
+.exercise-box {
+    background: #f9f9f9;
+    border-left: 4px solid var(--accent-pink);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    font-family: var(--font-primary);
+}
+.exercise-box p {
+    margin-bottom: 0.5rem;
+}
