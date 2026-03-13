@@ -939,7 +939,7 @@ body.menu-open {
 /* ===== PAGE HEADER ===== */
 .page-header {
     background: linear-gradient(135deg, var(--primary-blue), var(--deep-purple));
-    color: black;
+    color: white;
     text-align: center;
     padding: 4rem 0 3rem;
 }
@@ -1869,4 +1869,5 @@ select.form-control:focus,
 }
 
 /* For browsers that don't support appearance, the fallback is the default arrow */
+
 
