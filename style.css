@@ -1833,3 +1833,40 @@ body {
     background: #fcfdff;
     color: #1e2b3c;
 }
+
+/* Style for select dropdowns – matches input fields */
+select.form-control,
+.contact-form select {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    background-color: white;
+    /* Custom dropdown arrow */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+select.form-control:hover,
+.contact-form select:hover {
+    border-color: var(--primary-blue);
+}
+
+select.form-control:focus,
+.contact-form select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 150, 190, 0.2);
+}
+
+/* For browsers that don't support appearance, the fallback is the default arrow */
+
