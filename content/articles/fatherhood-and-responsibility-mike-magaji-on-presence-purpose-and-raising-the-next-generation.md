@@ -4,7 +4,7 @@ title: "Fatherhood and Responsibility: Mike Magaji on Presence, Purpose, and
 author: " Mike Magaji"
 date: 2026-03-17
 category: Career Advice
-image: /images/uploads/653811076_1426367012836324_8201305798256085712_n.jpg
+image: /images/uploads/653811076_1426367012836324_82013057982560857112_n.jpg
 ---
 
 
