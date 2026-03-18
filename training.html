@@ -395,32 +395,32 @@
                     document.getElementById('loginSection').style.display = 'none';
                     document.getElementById('dashboard').style.display = 'block';
                     document.getElementById('userEmail').textContent = user.email;
-
+            
                     // Get or create user progress document
                     const userRef = db.collection('progress').doc(user.uid);
                     const doc = await userRef.get();
                     if (!doc.exists) {
                         await userRef.set({ email: user.email });
                     }
-
+            
                     // Fetch user data again to get progress
                     const userData = (await userRef.get()).data();
                     const list = document.getElementById('topicList');
                     list.innerHTML = ''; // clear any placeholder
-
-                    // After getting userData
-                    const totalLessons = topics.length; // topics array has 13 items
+            
+                    // Calculate progress
+                    const totalLessons = topics.length;
                     const completedCount = topics.filter(topic => userData[topic.id]).length;
                     const percentage = Math.round((completedCount / totalLessons) * 100);
-                    
-                    // Update progress bar
-                    document.getElementById('progress-percent').textContent = percentage + '%';
-                    document.getElementById('progress-fill').style.width = percentage + '%';
+            
+                    // Update progress bar (with null checks)
+                    const percentEl = document.getElementById('progress-percent');
+                    const fillEl = document.getElementById('progress-fill');
                     if (percentEl && fillEl) {
                         percentEl.textContent = percentage + '%';
                         fillEl.style.width = percentage + '%';
                     }
-
+            
                     // Build cards
                     topics.forEach(topic => {
                         const completed = userData[topic.id] || false;
