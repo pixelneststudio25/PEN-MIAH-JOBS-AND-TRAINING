@@ -404,6 +404,7 @@
 
     <!-- Firebase integration -->
     <script>
+        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyDBFRGnQEgBffLtDgmFXdkqcwAKAkRigJI",
             authDomain: "penmiah-work-ethics-program.firebaseapp.com",
@@ -419,35 +420,38 @@
     
         auth.onAuthStateChanged(async (user) => {
             if (!user) {
-                // Redirect to dashboard if not signed in
                 window.location.href = 'training.html';
                 return;
             }
     
-            // Reference to the user's progress document
+            // Reference to user progress
             const userRef = db.collection('progress').doc(user.uid);
     
-            // Find the button (make sure its id is "completeBtn")
-            const completeBtn = document.getElementById('completeBtn');
-            if (!completeBtn) {
-                console.error('Button with id "completeBtn" not found');
-                return;
+            // Create document if it doesn't exist
+            const doc = await userRef.get();
+            if (!doc.exists) {
+                await userRef.set({ email: user.email });
             }
     
-            // Attach the click handler
-            completeBtn.addEventListener('click', async function() {
-                try {
-                    // Update progress – change "lesson1" to match the current lesson
-                    await userRef.update({
-                        lesson3: true
-                    });
-                    // Redirect back to the dashboard
-                    window.location.href = 'training.html';
-                } catch (error) {
-                    console.error('Error updating progress:', error);
-                    alert('Failed to save progress. Please try again.');
-                }
-            });
+            // Get the button using its actual ID: "markComplete"
+            const markCompleteBtn = document.getElementById('markComplete');
+            if (markCompleteBtn) {
+                markCompleteBtn.addEventListener('click', async function() {
+                    try {
+                        // Update progress – change "lesson1" to match current lesson
+                        await userRef.update({
+                            lesson3: true
+                        });
+                        // Redirect back to dashboard
+                        window.location.href = 'training.html';
+                    } catch (error) {
+                        console.error('Error updating progress:', error);
+                        alert('Failed to save progress: ' + error.message);
+                    }
+                });
+            } else {
+                console.error('Button with id "markComplete" not found');
+            }
         });
     </script>
     <!-- Mobile menu toggle (simple) -->
