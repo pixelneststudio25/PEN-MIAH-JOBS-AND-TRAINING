@@ -432,17 +432,30 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-
+    
         auth.onAuthStateChanged(async (user) => {
             if (!user) {
+                // Redirect to dashboard if not signed in
                 window.location.href = 'training.html';
                 return;
             }
-
+    
+            // Reference to the user's progress document
+            const userRef = db.collection('progress').doc(user.uid);
+    
+            // Find the button (make sure its id is "completeBtn")
+            const completeBtn = document.getElementById('completeBtn');
+            if (!completeBtn) {
+                console.error('Button with id "completeBtn" not found');
+                return;
+            }
+    
+            // Attach the click handler
             completeBtn.addEventListener('click', async function() {
                 try {
+                    // Update progress – change "lesson1" to match the current lesson
                     await userRef.update({
-                        lesson2: true // change to lesson2, lesson3, etc.
+                        lesson2: true
                     });
                     // Redirect back to the dashboard
                     window.location.href = 'training.html';
@@ -451,11 +464,8 @@
                     alert('Failed to save progress. Please try again.');
                 }
             });
-                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
-            };
         });
     </script>
-
     <!-- Mobile menu toggle (simple) -->
     <script>
         const hamburger = document.getElementById('hamburger');
