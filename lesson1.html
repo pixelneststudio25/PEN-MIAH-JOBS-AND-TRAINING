@@ -453,12 +453,22 @@
                 return;
             }
 
-            document.getElementById('markComplete').onclick = async () => {
-                await db.collection('progress').doc(user.uid).update({
-                    lesson1: true  // adjust for each lesson
-                });
-                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
-            };
+            completeBtn.addEventListener('click', async function() {
+                try {
+                    await userRef.update({
+                        lesson1: true  // change per lesson
+                    });
+                    // Redirect to dashboard
+                    window.location.href = 'training.html';
+                } catch (error) {
+                    console.error('Error updating progress:', error);
+                    alert('Failed to save progress. Please try again.');
+                }
+                await userRef.update({ lesson1: true });
+                setTimeout(() => {
+                    window.location.href = 'training.html';
+                }, 500); // 500ms delay
+            });
         });
     </script>
     <!-- NOTE: Hamburger menu functionality is assumed to exist in style.css or a separate script; if needed, include minimal script for toggle -->
