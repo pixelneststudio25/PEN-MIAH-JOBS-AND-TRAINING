@@ -176,6 +176,33 @@
         .not-started {
             color: var(--gray);
         }
+        .progress-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--deep-purple);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-pink));
+            border-radius: 20px;
+            transition: width 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -249,6 +276,15 @@
                     <div class="user-welcome">
                         <i class="fas fa-user-circle"></i> <span id="userEmail"></span>
                     </div>
+                    <div class="progress-container">
+                    <div class="progress-info">
+                        <span>Your Overall Progress</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
                 </div>
                 <p class="course-intro">Complete all 13 modules to earn your certificate. Mark each lesson as done after studying and taking the quiz.</p>
                 <div id="topicList" class="topics-grid">
@@ -371,6 +407,19 @@
                     const userData = (await userRef.get()).data();
                     const list = document.getElementById('topicList');
                     list.innerHTML = ''; // clear any placeholder
+
+                    // After getting userData
+                    const totalLessons = topics.length; // topics array has 13 items
+                    const completedCount = topics.filter(topic => userData[topic.id]).length;
+                    const percentage = Math.round((completedCount / totalLessons) * 100);
+                    
+                    // Update progress bar
+                    document.getElementById('progress-percent').textContent = percentage + '%';
+                    document.getElementById('progress-fill').style.width = percentage + '%';
+                    if (percentEl && fillEl) {
+                        percentEl.textContent = percentage + '%';
+                        fillEl.style.width = percentage + '%';
+                    }
 
                     // Build cards
                     topics.forEach(topic => {
