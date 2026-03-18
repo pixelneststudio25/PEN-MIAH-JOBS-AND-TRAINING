@@ -445,29 +445,37 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-
+    
         auth.onAuthStateChanged(async (user) => {
             if (!user) {
-                // Redirect to login if not signed in
+                // Redirect to dashboard if not signed in
                 window.location.href = 'training.html';
                 return;
             }
-
+    
+            // Reference to the user's progress document
+            const userRef = db.collection('progress').doc(user.uid);
+    
+            // Find the button (make sure its id is "completeBtn")
+            const completeBtn = document.getElementById('completeBtn');
+            if (!completeBtn) {
+                console.error('Button with id "completeBtn" not found');
+                return;
+            }
+    
+            // Attach the click handler
             completeBtn.addEventListener('click', async function() {
                 try {
+                    // Update progress – change "lesson1" to match the current lesson
                     await userRef.update({
-                        lesson1: true  // change per lesson
+                        lesson1: true
                     });
-                    // Redirect to dashboard
+                    // Redirect back to the dashboard
                     window.location.href = 'training.html';
                 } catch (error) {
                     console.error('Error updating progress:', error);
                     alert('Failed to save progress. Please try again.');
                 }
-                await userRef.update({ lesson1: true });
-                setTimeout(() => {
-                    window.location.href = 'training.html';
-                }, 500); // 500ms delay
             });
         });
     </script>
