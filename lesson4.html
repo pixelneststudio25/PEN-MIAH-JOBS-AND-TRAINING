@@ -426,19 +426,38 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-
+    
         auth.onAuthStateChanged(async (user) => {
             if (!user) {
+                // Redirect to dashboard if not signed in
                 window.location.href = 'training.html';
                 return;
             }
-
-            document.getElementById('markComplete').onclick = async () => {
-                await db.collection('progress').doc(user.uid).update({
-                    lesson4: true  // adjust for each lesson
-                });
-                document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
-            };
+    
+            // Reference to the user's progress document
+            const userRef = db.collection('progress').doc(user.uid);
+    
+            // Find the button (make sure its id is "completeBtn")
+            const completeBtn = document.getElementById('completeBtn');
+            if (!completeBtn) {
+                console.error('Button with id "completeBtn" not found');
+                return;
+            }
+    
+            // Attach the click handler
+            completeBtn.addEventListener('click', async function() {
+                try {
+                    // Update progress – change "lesson1" to match the current lesson
+                    await userRef.update({
+                        lesson4: true
+                    });
+                    // Redirect back to the dashboard
+                    window.location.href = 'training.html';
+                } catch (error) {
+                    console.error('Error updating progress:', error);
+                    alert('Failed to save progress. Please try again.');
+                }
+            });
         });
     </script>
 
