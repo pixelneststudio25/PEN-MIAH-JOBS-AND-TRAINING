@@ -439,10 +439,18 @@
                 return;
             }
 
-            document.getElementById('markComplete').onclick = async () => {
-                await db.collection('progress').doc(user.uid).update({
-                    lesson2: true  // adjust for each lesson
-                });
+            completeBtn.addEventListener('click', async function() {
+                try {
+                    await userRef.update({
+                        lesson2: true // change to lesson2, lesson3, etc.
+                    });
+                    // Redirect back to the dashboard
+                    window.location.href = 'training.html';
+                } catch (error) {
+                    console.error('Error updating progress:', error);
+                    alert('Failed to save progress. Please try again.');
+                }
+            });
                 document.getElementById('message').textContent = 'Progress saved! You can now go back to dashboard.';
             };
         });
