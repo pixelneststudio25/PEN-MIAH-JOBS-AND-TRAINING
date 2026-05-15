@@ -177,7 +177,7 @@
                         <h3>${article.title}</h3>
                         <p class="date"><i class="far fa-calendar-alt"></i> ${article.date}</p>
                         <p class="excerpt">${article.excerpt || ''}</p>
-                        <a href="article.html?slug=${article.slug}" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                        <a href="${article.url}" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             `).join('');
