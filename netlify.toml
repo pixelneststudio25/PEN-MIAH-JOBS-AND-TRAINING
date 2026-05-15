@@ -4,3 +4,8 @@
     Content-Type = "text/plain"
 
 
+[[redirects]]
+  from = "/article.html"
+  to = "/magazine.html"
+  status = 302
+  
