@@ -1871,3 +1871,43 @@ select.form-control:focus,
 /* For browsers that don't support appearance, the fallback is the default arrow */
 
 
+
+/* Social Share Section */
+.social-share-section {
+    margin: 3rem 0 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+.social-share-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--deep-purple);
+}
+.social-share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: white;
+}
+.share-btn i {
+    font-size: 1rem;
+}
+.share-btn.facebook { background: #1877f2; }
+.share-btn.twitter { background: #1da1f2; }
+.share-btn.linkedin { background: #0077b5; }
+.share-btn.whatsapp { background: #25d366; }
+.share-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.95);
+}
