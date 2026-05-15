@@ -17,6 +17,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="theme-color" content="#2596be">
+    <!-- Open Graph meta tags will be injected dynamically -->
 </head>
 <body>
     <header id="header">
@@ -132,34 +133,68 @@
         const params = new URLSearchParams(window.location.search);
         const slug = params.get('slug');
 
+        // Helper to update Open Graph meta tags dynamically
+        function updateMetaTags(article) {
+            // Remove existing OG tags to avoid duplicates
+            document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(tag => tag.remove());
+
+            const metaTags = [
+                { property: 'og:title', content: article.title },
+                { property: 'og:description', content: article.excerpt || (article.body ? article.body.substring(0, 150).replace(/\n/g, ' ') : 'Read this article from PEN-MIAH') },
+                { property: 'og:image', content: article.image || 'https://penmiahjobs.com/images/default-social.jpg' },
+                { property: 'og:url', content: window.location.href },
+                { property: 'og:type', content: 'article' },
+                { name: 'twitter:card', content: 'summary_large_image' },
+                { name: 'twitter:title', content: article.title },
+                { name: 'twitter:description', content: article.excerpt || (article.body ? article.body.substring(0, 150) : '') },
+                { name: 'twitter:image', content: article.image || 'https://penmiahjobs.com/images/default-social.jpg' }
+            ];
+            metaTags.forEach(tag => {
+                const meta = document.createElement('meta');
+                if (tag.property) meta.setAttribute('property', tag.property);
+                if (tag.name) meta.setAttribute('name', tag.name);
+                meta.setAttribute('content', tag.content);
+                document.head.appendChild(meta);
+            });
+        }
+
         async function loadArticle() {
             if (!slug) {
                 document.getElementById('articleContainer').innerHTML = '<p>Article not found.</p>';
                 return;
             }
             try {
-                // Fetch the markdown file from content/articles/{slug}.md
                 const response = await fetch(`content/articles/${slug}.md`);
                 if (!response.ok) throw new Error('Not found');
                 const markdown = await response.text();
 
-                // Parse frontmatter (simple split – for production use gray-matter)
                 const parts = markdown.split('---');
                 const frontmatter = parts[1];
                 const content = parts.slice(2).join('---');
 
-                // Convert markdown to HTML
                 const converter = new showdown.Converter();
                 const htmlContent = converter.makeHtml(content);
 
-                // Parse frontmatter (very basic, you can improve)
+                // Parse frontmatter
                 const titleMatch = frontmatter.match(/title:\s*(.+)/);
                 const dateMatch = frontmatter.match(/date:\s*(.+)/);
                 const authorMatch = frontmatter.match(/author:\s*(.+)/);
                 const categoryMatch = frontmatter.match(/category:\s*(.+)/);
                 const imageMatch = frontmatter.match(/image:\s*(.+)/);
+                const excerptMatch = frontmatter.match(/excerpt:\s*(.+)/);
 
-                document.getElementById('articleContainer').innerHTML = `
+                const articleData = {
+                    title: titleMatch ? titleMatch[1].trim() : 'Untitled',
+                    image: imageMatch ? imageMatch[1].trim() : null,
+                    excerpt: excerptMatch ? excerptMatch[1].trim() : null,
+                    body: content
+                };
+
+                // Update meta tags for social sharing
+                updateMetaTags(articleData);
+
+                // Build the article HTML including share buttons
+                const articleHTML = `
                     <article class="full-article">
                         <h1>${titleMatch ? titleMatch[1] : 'Untitled'}</h1>
                         <div class="meta">
@@ -169,9 +204,34 @@
                         </div>
                         ${imageMatch ? `<img src="${imageMatch[1].trim()}" alt="Featured image">` : ''}
                         <div class="article-body">${htmlContent}</div>
+                        <div class="social-share-section">
+                            <h4>Share this article:</h4>
+                            <div class="social-share-buttons">
+                                <a href="#" id="share-facebook" class="share-btn facebook" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                                <a href="#" id="share-twitter" class="share-btn twitter" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a href="#" id="share-linkedin" class="share-btn linkedin" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                                <a href="#" id="share-whatsapp" class="share-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            </div>
+                        </div>
                         <a href="magazine.html" class="btn btn-secondary">← Back to Magazine</a>
                     </article>
                 `;
+                document.getElementById('articleContainer').innerHTML = articleHTML;
+
+                // Set share button URLs
+                const articleTitle = encodeURIComponent(articleData.title);
+                const articleURL = encodeURIComponent(window.location.href);
+                const shareUrls = {
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${articleURL}`,
+                    twitter: `https://twitter.com/intent/tweet?text=${articleTitle}&url=${articleURL}`,
+                    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${articleURL}`,
+                    whatsapp: `https://wa.me/?text=${articleTitle}%20-%20${articleURL}`
+                };
+                document.getElementById('share-facebook').href = shareUrls.facebook;
+                document.getElementById('share-twitter').href = shareUrls.twitter;
+                document.getElementById('share-linkedin').href = shareUrls.linkedin;
+                document.getElementById('share-whatsapp').href = shareUrls.whatsapp;
+
             } catch (error) {
                 document.getElementById('articleContainer').innerHTML = '<p class="error">Article not found.</p>';
             }
@@ -180,7 +240,4 @@
         loadArticle();
     </script>
 </body>
-
 </html>
-
-
