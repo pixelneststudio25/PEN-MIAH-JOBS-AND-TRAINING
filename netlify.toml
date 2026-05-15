@@ -2,3 +2,9 @@
   for = "*.yml"
   [headers.values]
     Content-Type = "text/plain"
+
+[[redirects]]
+  from = "/article.html"
+  to = "/.netlify/functions/article"
+  status = 200
+  force = true
